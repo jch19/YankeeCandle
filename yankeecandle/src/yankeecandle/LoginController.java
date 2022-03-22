@@ -56,7 +56,24 @@ public class LoginController{
             final Stage loginStage = (Stage) rootpane.getScene().getWindow();
             loginStage.close();
             
-       }else{
+       }
+ 
+       if(email.getText().equals(user1.getEmail()) && password.getText().equals(user1.getPassword())){   
+            Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+        
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            
+            stage.setTitle("YankeeCandle");
+            stage.setScene(scene);
+            stage.show();
+            
+            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+            loginStage.close();
+            
+       }
+       
+       else{
             signinError.setVisible(true); //show that the creds are invalid 
        }
         password.clear();
