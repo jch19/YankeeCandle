@@ -45,4 +45,20 @@ public class SignUpController {
          AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
          rootpane.getChildren().setAll(pane);
     }
+    
+     @FXML
+     private void shop(ActionEvent event) throws IOException{
+            Parent root = FXMLLoader.load(getClass().getResource("ShopView.fxml"));
+        
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            
+            stage.setTitle("YankeeCandle");
+            stage.setScene(scene);
+            stage.show();
+            
+            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+            loginStage.close();
+     }
+     
 }
