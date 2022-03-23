@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yankeecandle.ViewCandlesController">
+   <children>
+      <Button fx:id="exitProgram" layoutX="1145.0" layoutY="47.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="113.0" text="Sign out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="197.0" fitWidth="529.0" layoutX="340.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="398.875" AnchorPane.topAnchor="14.0">
+         <image>
+            <Image url="@ykcvlogo.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="292.0" fitWidth="300.0" layoutX="478.0" layoutY="316.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="478.0" AnchorPane.rightAnchor="478.0">
+         <image>
+            <Image url="@cashmere.JPG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="311.0" fitWidth="300.0" layoutX="66.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@pinksands.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="279.0" fitWidth="300.0" layoutX="878.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@lemon.JPG" />
+         </image>
+      </ImageView>
+      <Label layoutX="935.0" layoutY="618.0" text="Iced Berry Lemonade">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="999.0" layoutY="659.0" text="\$16.00">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="535.0" layoutY="618.0" text="Warm Luxe Cashmere">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="599.0" layoutY="659.0" text="\$16.00">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="168.0" layoutY="618.0" text="Pink Sands">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="187.0" layoutY="659.0" text="\$16.00">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button fx:id="addPinkSands" layoutX="159.0" layoutY="709.0" mnemonicParsing="false" onAction="#addPinkSands" text="Add to Cart">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="addCashmere" layoutX="573.0" layoutY="709.0" mnemonicParsing="false" onAction="#addCashmere" text="Add to Cart">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="addLemonade" layoutX="971.0" layoutY="709.0" mnemonicParsing="false" onAction="#addLemonade" text="Add to Cart">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="viewCartButton" layoutX="1008.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewCartButton" prefHeight="44.0" prefWidth="113.0" text="View Cart">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
