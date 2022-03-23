@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -15,9 +14,6 @@ public class CustomerViewController {
 
     @FXML
     private AnchorPane rootpane;
-
-    @FXML
-    private Menu exit;
 
     @FXML
     private Button viewOrders;
@@ -28,16 +24,11 @@ public class CustomerViewController {
     @FXML
     private Button editCart;
 
-    //Function that handles when we click on logout
     @FXML
-    void exitProgram(ActionEvent event) {
-        System.exit(0);
-    }
+    private Button exitProgram;
 
-    //Function that handles when we click on view candles
     @FXML
     void viewCandles(ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("ViewCandles.fxml"));
 
         Scene scene = new Scene(root);
@@ -47,16 +38,23 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        final Stage customerViewStage = (Stage) rootpane.getScene().getWindow();
-        customerViewStage.close();
+        final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
+        CustomerViewStage.close();
+    }
+
+    @FXML
+    void editCart(ActionEvent event) {
 
     }
 
-    //Function that handles when we click on edit cart
     @FXML
-    void editCart(ActionEvent event) throws IOException {
+    void viewOrders(ActionEvent event) {
 
-        Parent root = FXMLLoader.load(getClass().getResource("ViewCart.fxml"));
+    }
+
+    @FXML
+    void exitProgram(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -65,14 +63,8 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        final Stage customerViewStage = (Stage) rootpane.getScene().getWindow();
-        customerViewStage.close();
-    }
-
-    //Function that handles when we click on view orders
-    @FXML
-    void viewOrders(ActionEvent event) {
-        
+        final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
+        CustomerViewStage.close();
     }
 
 }

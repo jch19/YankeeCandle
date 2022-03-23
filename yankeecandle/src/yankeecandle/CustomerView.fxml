@@ -8,28 +8,33 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yankeecandle.CustomerViewController">
+<AnchorPane minWidth="-Infinity" prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yankeecandle.CustomerViewController">
    <children>
-      <Button fx:id="viewCandles" alignment="CENTER" layoutX="38.0" layoutY="123.0" mnemonicParsing="false" onAction="#viewCandles" text="View Candles" />
-      <Button fx:id="editCart" alignment="CENTER" layoutX="51.0" layoutY="201.0" mnemonicParsing="false" onAction="#editCart" text="View Cart" />
-      <Button fx:id="viewOrders" layoutX="42.0" layoutY="289.0" mnemonicParsing="false" onAction="#viewOrders" text="View Orders" />
-      <ImageView fitHeight="365.0" fitWidth="411.0" layoutX="187.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="935.0" fitWidth="1321.0" layoutX="-8.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@candle3.JPG" />
+            <Image url="@bg.jpg" />
+         </image></ImageView>
+      <Button fx:id="viewCandles" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="275.0" mnemonicParsing="false" onAction="#viewCandles" prefHeight="44.0" prefWidth="161.0" text="View Candles">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="editCart" alignment="CENTER" contentDisplay="CENTER" layoutX="56.0" layoutY="506.0" mnemonicParsing="false" onAction="#editCart" prefHeight="44.0" prefWidth="161.0" text="View Cart">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Button fx:id="viewOrders" contentDisplay="CENTER" layoutX="56.0" layoutY="737.0" mnemonicParsing="false" onAction="#viewOrders" prefHeight="46.0" prefWidth="161.0" text="View Orders">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <Separator layoutX="272.0" layoutY="222.0" orientation="VERTICAL" prefHeight="713.0" prefWidth="16.0" />
+      <Button fx:id="exitProgram" layoutX="1129.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="113.0" text="Sign out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="20.0" />
+         </font></Button>
+      <ImageView fitHeight="197.0" fitWidth="529.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ykcvlogo.png" />
          </image>
       </ImageView>
-      <Label layoutX="60.0" layoutY="63.0" prefHeight="31.0" prefWidth="77.0" text="Welcome" />
-      <MenuBar layoutX="512.0" layoutY="-2.0" nodeOrientation="RIGHT_TO_LEFT" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-          <Menu fx:id="exit" mnemonicParsing="false" onAction="#exitProgram" text="Logout" />
-        </menus>
-      </MenuBar>
-      <ImageView fitHeight="31.0" fitWidth="276.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@yklogo.png" />
-         </image>
-      </ImageView>
-      <Separator layoutX="179.0" layoutY="30.0" orientation="VERTICAL" prefHeight="371.0" prefWidth="16.0" />
    </children>
 </AnchorPane>
