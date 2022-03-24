@@ -43,8 +43,18 @@ public class CustomerViewController {
     }
 
     @FXML
-    void editCart(ActionEvent event) {
+    void editCart(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ViewCart.fxml"));
 
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setScene(scene);
+        stage.show();
+
+        final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
+        CustomerViewStage.close();
     }
 
     @FXML
