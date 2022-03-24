@@ -82,5 +82,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <Button layoutX="886.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="44.0" prefWidth="113.0" text="Home">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

@@ -8,28 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ViewCandlesController {
-
-    @FXML
-    private AnchorPane rootpane;
-
-    @FXML
-    private Button addLemonade;
-
-    @FXML
-    private Button viewCartButton;
-
-    @FXML
-    private Button addCashmere;
+public class OrdersViewController {
 
     @FXML
     private Button exitProgram;
-
-    @FXML
-    private Button addPinkSands;
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
@@ -43,36 +27,6 @@ public class ViewCandlesController {
         stage.show();
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    @FXML
-    void addPinkSands(ActionEvent event) {
-
-    }
-
-    @FXML
-    void addCashmere(ActionEvent event) {
-
-    }
-
-    @FXML
-    void addLemonade(ActionEvent event) {
-
-    }
-
-    @FXML
-    void viewCartButton(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ViewCart.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-
-        stage.setTitle("YankeeCandle");
-        stage.setScene(scene);
-        stage.show();
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-
     }
 
     @FXML
