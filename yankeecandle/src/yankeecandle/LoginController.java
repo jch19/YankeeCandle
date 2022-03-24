@@ -36,7 +36,7 @@ public class LoginController{
     User admin = new User("admin", "1234", "admin");
     User user1 = new User("user@gmail.com", "1234", "user");
     User vendor1 = new User("vendor@gmail.com", "1234", "vendor");
-   
+    User sales = new User("sales", "1234", "SalesView");
     
     /*
         function that handles when we press the login button    
@@ -60,6 +60,21 @@ public class LoginController{
  
        if(email.getText().equals(user1.getEmail()) && password.getText().equals(user1.getPassword())){   
             Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+        
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            
+            stage.setTitle("YankeeCandle");
+            stage.setScene(scene);
+            stage.show();
+            
+            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+            loginStage.close();
+            
+       }
+       
+              if(email.getText().equals(sales.getEmail()) && password.getText().equals(sales.getPassword())){   
+            Parent root = FXMLLoader.load(getClass().getResource("SalesView.fxml"));
         
             Scene scene = new Scene(root);
             Stage stage = new Stage();
