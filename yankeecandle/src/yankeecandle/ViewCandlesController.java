@@ -11,66 +11,25 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class CustomerViewController {
+public class ViewCandlesController {
 
     @FXML
     private AnchorPane rootpane;
 
     @FXML
-    private Button viewOrders;
+    private Button addLemonade;
 
     @FXML
-    private Button viewCandles;
+    private Button viewCartButton;
 
     @FXML
-    private Button editCart;
+    private Button addCashmere;
 
     @FXML
     private Button exitProgram;
 
     @FXML
-    void viewCandles(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ViewCandles.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-
-        stage.setTitle("YankeeCandle");
-        stage.setScene(scene);
-        stage.show();
-
-        //final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
-        //CustomerViewStage.close();
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    @FXML
-    void editCart(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("ViewCart.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-
-        stage.setTitle("YankeeCandle");
-        stage.setScene(scene);
-        stage.show();
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    @FXML
-    void viewOrders(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("OrdersView.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-
-        stage.setTitle("YankeeCandle");
-        stage.setScene(scene);
-        stage.show();
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
+    private Button addPinkSands;
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
@@ -84,9 +43,50 @@ public class CustomerViewController {
         stage.show();
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
+    }
+
+    @FXML
+    void addPinkSands(ActionEvent event) {
 
     }
-    
 
+    @FXML
+    void addCashmere(ActionEvent event) {
+
+    }
+
+    @FXML
+    void addLemonade(ActionEvent event) {
+
+    }
+
+    @FXML
+    void viewCartButton(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("ViewCart.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setScene(scene);
+        stage.show();
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
+    }
+
+    @FXML
+    void home(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setScene(scene);
+        stage.show();
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+    }
 
 }

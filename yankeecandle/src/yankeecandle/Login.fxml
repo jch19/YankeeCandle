@@ -43,5 +43,6 @@
          <font>
             <Font size="14.0" />
          </font></Label>
+      <Hyperlink layoutX="550.0" layoutY="363.0" onAction="#shop" text="Shop" />
    </children>
 </AnchorPane>

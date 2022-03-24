@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="yankeecandle.jar" size="62651" download="eager" />
+=======
+    <jar href="yankeecandle.jar" size="59307" download="eager" />
+>>>>>>> 4754dc928ade155559967ce6a992788a815ff1c9
   </resources>
   <jfx:javafx-desc  width="800" height="600" main-class="yankeecandle.Yankeecandle"  name="yankeecandle" />
   <update check="always"/>
