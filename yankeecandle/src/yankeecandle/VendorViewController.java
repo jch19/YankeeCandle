@@ -73,12 +73,5 @@ public class VendorViewController {
         final Stage VendorViewStage = (Stage) pane.getScene().getWindow();
         VendorViewStage.close();
 }
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
-
+    
 }
