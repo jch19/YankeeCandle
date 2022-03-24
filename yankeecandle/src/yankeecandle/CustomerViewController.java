@@ -4,6 +4,7 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -38,8 +39,9 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
-        CustomerViewStage.close();
+        //final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
+        //CustomerViewStage.close();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -53,8 +55,8 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
-        CustomerViewStage.close();
+     
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -73,8 +75,8 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
-        CustomerViewStage.close();
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
     }
 
 }
