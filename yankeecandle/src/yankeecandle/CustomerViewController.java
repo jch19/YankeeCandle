@@ -41,7 +41,7 @@ public class CustomerViewController {
 
         //final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
         //CustomerViewStage.close();
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -55,13 +55,21 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-     
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
-    void viewOrders(ActionEvent event) {
+    void viewOrders(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("OrdersView.fxml"));
 
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setScene(scene);
+        stage.show();
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -75,8 +83,10 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
 
     }
+    
+
 
 }
