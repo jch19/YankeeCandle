@@ -26,5 +26,20 @@
          </font>
       </Button>
       <Separator layoutX="841.0" layoutY="228.0" orientation="VERTICAL" prefHeight="693.0" prefWidth="59.0" />
+      <ImageView fitHeight="177.0" fitWidth="806.0" layoutX="35.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@placeholder1.JPG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="170.0" fitWidth="806.0" layoutX="35.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@placeholder2.JPG" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="236.0" fitWidth="368.0" layoutX="883.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@placeholder3.JPG" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
