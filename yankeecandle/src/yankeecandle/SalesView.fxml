@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="rootpane" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yankeecandle.SalesViewController">
+<BorderPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yankeecandle.SalesViewController">
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
@@ -22,9 +23,9 @@
       </HBox>
    </bottom>
    <top>
-      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="25.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar>
+            <MenuBar VBox.vgrow="ALWAYS">
               <menus>
                 <Menu fx:id="LogoutButton" mnemonicParsing="false" onAction="#signOut" text="Options">
                      <items>
@@ -45,29 +46,43 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0">
+            <HBox alignment="TOP_CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="228.0" prefWidth="584.0" spacing="10.0">
                <children>
-                  <ImageView fitHeight="57.0" fitWidth="772.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../build/classes/yankeecandle/logo.png" />
-                     </image>
+                  <ImageView fitHeight="60.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets />
                      </HBox.margin>
+                     <image>
+                        <Image url="@logo.png" />
+                     </image>
                   </ImageView>
-                  <TextField promptText="Order #">
+                  <Region prefHeight="67.0" prefWidth="80.0" />
+                  <TextField promptText="Order #" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets left="30.0" />
-                     </HBox.margin></TextField>
-                  <TextField promptText="Cust_Name" />
+                        <Insets />
+                     </HBox.margin>
+                  </TextField>
+                  <TextField promptText="Cust_Name" HBox.hgrow="ALWAYS" />
                   <Region HBox.hgrow="ALWAYS" />
-                  <Button mnemonicParsing="false" text="Search" />
+                  <Button mnemonicParsing="false" text="Search" HBox.hgrow="ALWAYS" />
                </children>
                <VBox.margin>
-                  <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                  <Insets bottom="8.0" left="8.0" right="8.0" top="6.0" />
                </VBox.margin>
             </HBox>
          </children>
       </VBox>
    </top>
+   <center>
+      <TreeTableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+        <columns>
+            <TreeTableColumn prefWidth="577.0" text="Cus_Name" />
+          <TreeTableColumn prefWidth="319.0" resizable="false" text="Order #" />
+          <TreeTableColumn prefWidth="458.0" text="Details" />
+        </columns>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </TreeTableView>
+   </center>
 </BorderPane>
