@@ -54,7 +54,7 @@
             <Image url="@pinksands.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="797.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="Edit Inventory">
+      <Button fx:id="edit" layoutX="797.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="150.0" text="Edit Inventory">
          <font>
             <Font size="20.0" />
          </font>

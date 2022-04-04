@@ -34,6 +34,20 @@ public class ViewInventoryController  {
        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
+     @FXML
+    void edit(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("UpdateStock.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setScene(scene);
+        stage.show();
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
+    }
     @FXML
     void exit(ActionEvent event) {
         //will close program

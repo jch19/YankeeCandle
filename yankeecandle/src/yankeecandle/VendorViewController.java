@@ -44,7 +44,7 @@ public class VendorViewController {
     @FXML
     void ViewInventory(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("VendorView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("ViewInventory.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -61,7 +61,7 @@ public class VendorViewController {
      @FXML
     void UpdateStock(ActionEvent event) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("VendorView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("UpdateStock.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
