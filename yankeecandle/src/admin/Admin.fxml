@@ -4,12 +4,14 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.AdminController">
+<AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.AdminController">
    <children>
       <TabPane layoutY="59.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -17,13 +19,39 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Button fx:id="test" layoutX="78.0" layoutY="80.0" mnemonicParsing="false" onAction="#test" text="Test" />
+                        <TableView fx:id="user_table" editable="true" layoutX="200.0" layoutY="56.0" prefHeight="312.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                          <columns>
+                            <TableColumn fx:id="user_id" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="user_email" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="user_name" prefWidth="116.0" text="Name" />
+                              <TableColumn fx:id="user_password" prefWidth="86.0" text="Password" />
+                              <TableColumn fx:id="user_role" prefWidth="86.0" text="Role" />
+                              <TableColumn fx:id="user_active" prefWidth="55.0" text="Active" />
+                          </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
                      </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Assign Roles">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="user_table1" editable="true" prefHeight="312.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                           <columns>
+                              <TableColumn fx:id="user_id1" prefWidth="75.0" text="ID" />
+                              <TableColumn fx:id="user_email1" prefWidth="75.0" text="Email" />
+                              <TableColumn fx:id="user_name1" prefWidth="116.0" text="Name" />
+                              <TableColumn fx:id="user_password1" prefWidth="86.0" text="Password" />
+                              <TableColumn fx:id="user_role1" prefWidth="86.0" text="Role" />
+                           </columns>
+                        </TableView>
+                     </children></AnchorPane>
                </content>
             </Tab>
             <Tab text="Add Account">
@@ -37,6 +65,11 @@
                </content>
             </Tab>
             <Tab text="Reset Password">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+            </Tab>
+            <Tab text="Statistics">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>

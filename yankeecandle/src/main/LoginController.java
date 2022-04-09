@@ -3,7 +3,11 @@
 package main;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +17,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import util.DBConnector;
 
 
 /**
@@ -33,48 +38,102 @@ public class LoginController{
     @FXML
     private Label signinError;
     
-    User admin = new User("admin", "1234", "admin");
-    User user1 = new User("user@gmail.com", "1234", "user");
-    User vendor1 = new User("vendor@gmail.com", "1234", "vendor");
-   
+    DBConnector connector = new DBConnector();
+    
+    private static Connection conn;
+    private static Statement stat;
+    private PreparedStatement prep;
+    
+    String emailFound = "";
+    String passwordFound = "";
+    int role; 
+    int alive; // 1=notbanned, 0 = banned
     
     /*
         function that handles when we press the login button    
     */
      @FXML 
      private void login(ActionEvent event) throws IOException {
-       if(email.getText().equals(admin.getEmail()) && password.getText().equals(admin.getPassword())){   
-            Parent root = FXMLLoader.load(getClass().getResource("/admin/Admin.fxml"));
-        
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setTitle("YankeeCandle");
-            stage.setScene(scene);
-            stage.show();
-            
-            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-            loginStage.close();
-            
-       }else if(email.getText().equals(user1.getEmail()) && password.getText().equals(user1.getPassword())){   
-            Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
-        
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            
-            stage.setTitle("YankeeCandle");
-            stage.setScene(scene);
-            stage.show();
-            
-            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-            loginStage.close();
-            
-       }
-       
-       else{
+         
+       try{
+          if(loginValidation(email.getText().trim(), password.getText().trim()))
+          {
+              String query = "SELECT role, alive FROM users WHERE email = '"+emailFound+"' AND '"+ passwordFound+"';";
+              prep = conn.prepareStatement(query);
+              ResultSet rs = prep.executeQuery();
+              
+              role =  Integer.parseInt(rs.getString("role"));
+              alive = Integer.parseInt(rs.getString("alive"));
+              
+              if(alive != 0){
+                if(role == 1){ //User View (Customer)
+                      Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+
+                      Scene scene = new Scene(root);
+                      Stage stage = new Stage();
+
+                      stage.setTitle("YankeeCandle");
+                      stage.setScene(scene);
+                      stage.show();
+
+                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                      loginStage.close();
+
+
+                }else if(role == 2){ //Vendor Login
+                     Parent root = FXMLLoader.load(getClass().getResource("VendorView.fxml"));
+
+                      Scene scene = new Scene(root);
+                      Stage stage = new Stage();
+
+                      stage.setTitle("YankeeCandle");
+                      stage.setScene(scene);
+                      stage.show();
+
+                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                      loginStage.close();
+
+                }else if(role == 3){ //Salesperson view 
+                      Parent root = FXMLLoader.load(getClass().getResource("ShopView.fxml")); //NO FXML found, redo
+
+                      Scene scene = new Scene(root);
+                      Stage stage = new Stage();
+
+                      stage.setTitle("YankeeCandle");
+                      stage.setScene(scene);
+                      stage.show();
+
+                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                      loginStage.close();
+                }else if(role == 4){
+                     Parent root = FXMLLoader.load(getClass().getResource("/admin/Admin.fxml"));
+
+                      Scene scene = new Scene(root);
+                      Stage stage = new Stage();
+
+                      stage.setTitle("YankeeCandle");
+                      stage.setScene(scene);
+                      stage.show();
+
+                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                      loginStage.close();
+                }
+
+          }else{
+              signinError.setVisible(true);
+              signinError.setText("You have been banned.");
+          }
+              
+          } else{
             signinError.setVisible(true); //show that the creds are invalid 
+          }
+          password.clear();
+           
+           
+           
+       }catch (SQLException e){
+           e.printStackTrace();
        }
-        password.clear();
      }
      
      @FXML
@@ -109,6 +168,26 @@ public class LoginController{
             
             final Stage loginStage = (Stage) rootpane.getScene().getWindow();
             loginStage.close();
+     }
+     
+     public boolean loginValidation(String email, String password) throws SQLException{
+         
+         conn = connector.connect();
+         
+         String query = "SELECT email, name, role FROM users WHERE email = ? AND password = ?";
+         
+         prep = conn.prepareStatement(query);
+         prep.setString(1, email.trim());
+         prep.setString(2, password.trim());
+         ResultSet rs = prep.executeQuery();
+         if(rs.next()){
+             emailFound = email;
+             passwordFound = password;
+             return true;
+         }else{
+             return false;
+         }
+         
      }
      
      
