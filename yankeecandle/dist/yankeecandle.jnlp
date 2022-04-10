@@ -2,14 +2,15 @@
 <jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="yankeecandle.jnlp">
   <information>
     <title>yankeecandle</title>
-    <vendor>carol</vendor>
+    <vendor></vendor>
     <description>null</description>
     <offline-allowed/>
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="yankeecandle.jar" size="1551946" download="eager" />
+    <jar href="lib\sqlite-jdbc-3.36.0.3.jar" size="9731064" download="eager" />
+    <jar href="yankeecandle.jar" size="1563450" download="eager" />
   </resources>
-  <jfx:javafx-desc  width="800" height="600" main-class="yankeecandle.Yankeecandle"  name="yankeecandle" />
+  <jfx:javafx-desc  width="800" height="600" main-class="main.Yankeecandle"  name="yankeecandle" />
   <update check="always"/>
 </jnlp>
