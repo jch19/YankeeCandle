@@ -42,7 +42,7 @@ public class ViewCandlesController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node)(event.getSource())).getScene().getWindow().hide();
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
     @FXML
@@ -70,9 +70,23 @@ public class ViewCandlesController {
         stage.setTitle("YankeeCandle");
         stage.setScene(scene);
         stage.show();
-        
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-      
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
+
+    }
+
+    @FXML
+    void home(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setScene(scene);
+        stage.show();
+
+        ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
 }

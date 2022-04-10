@@ -1,4 +1,6 @@
-package main;
+
+
+package yankeecandle;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -8,18 +10,36 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ViewCartController {
 
+/**
+ * FXML Controller class
+ *
+ * @author kkirk
+ */
+public class UpdateStockController  {
+    
     @FXML
-    private AnchorPane rootpane;
-
-    // @FXML
-    // private Button exitProgram;
+    private TextArea t1;
+    
+     @FXML
+    private TextArea t2;
+    
+     @FXML
+    private TextArea t3;
+     
+      @FXML
+    private TextArea t4;
+   
+   @FXML
+    private AnchorPane pane;
+    
+    
     @FXML
-    void exitProgram(ActionEvent event) throws IOException {
+    void signout(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
         Scene scene = new Scene(root);
@@ -29,17 +49,13 @@ public class ViewCartController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+       ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
-    @FXML
-    void checkout(ActionEvent event) {
-        //will move to checkout for user upon clicking button 
-    }
-
+    
+    
     @FXML
     void home(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("VendorView.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -50,5 +66,9 @@ public class ViewCartController {
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
-
+    
+     @FXML
+    void save(ActionEvent event) {
+        //will close program
+    }
 }

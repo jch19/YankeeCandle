@@ -1,4 +1,6 @@
-package main;
+
+
+package yankeecandle;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -11,15 +13,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ViewCartController {
 
+public class ViewInventoryController  {
+   
     @FXML
-    private AnchorPane rootpane;
-
-    // @FXML
-    // private Button exitProgram;
+    private AnchorPane pane;
+    
+    
     @FXML
-    void exitProgram(ActionEvent event) throws IOException {
+    void signout(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
 
         Scene scene = new Scene(root);
@@ -29,17 +31,12 @@ public class ViewCartController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+       ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    @FXML
-    void checkout(ActionEvent event) {
-        //will move to checkout for user upon clicking button 
-    }
-
-    @FXML
-    void home(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+     @FXML
+    void edit(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("UpdateStock.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -49,6 +46,12 @@ public class ViewCartController {
         stage.show();
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
+
     }
+    @FXML
+    void exit(ActionEvent event) {
+        //will close program
+    }
+    
 
 }

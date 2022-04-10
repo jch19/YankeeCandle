@@ -1,4 +1,4 @@
-package main;
+package yankeecandle;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -8,16 +8,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class ViewCartController {
+public class OrdersViewController {
 
     @FXML
-    private AnchorPane rootpane;
+    private Button exitProgram;
 
-    // @FXML
-    // private Button exitProgram;
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
@@ -30,11 +27,6 @@ public class ViewCartController {
         stage.show();
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
-    }
-
-    @FXML
-    void checkout(ActionEvent event) {
-        //will move to checkout for user upon clicking button 
     }
 
     @FXML
