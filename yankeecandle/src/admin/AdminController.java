@@ -17,9 +17,17 @@ import javafx.scene.layout.*;
 import util.DBConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
+import javafx.scene.chart.*;
 
 /**
  *
@@ -27,104 +35,215 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class AdminController implements Initializable {
     
-    
-    
     DBConnector connector = new DBConnector();
 
     private static Connection conn;
     private static Statement stat;
     private PreparedStatement prep;
+    private ResultSet resultSet = null;
+    
+    User user = null;
+    private ObservableList <User> userList = FXCollections.observableArrayList();
+    private String query = "";
     
     @FXML
     private AnchorPane rootpane;
     
     @FXML
-    protected TableView<UserModel> user_table;
+    protected TableView<User> user_table;
     
     @FXML
-    private TableColumn<UserModel, String> user_id;
+    private TableColumn<User, String> user_id;
     
     @FXML
-    private TableColumn<UserModel, String> user_email;
+    private TableColumn<User, String> user_email;
         
     @FXML
-    private TableColumn<UserModel, String> user_name;
+    private TableColumn<User, String> user_name;
     
     @FXML
-    private TableColumn<UserModel, String> user_role;
+    private TableColumn<User, String> user_role;
     
     @FXML
-    private TableColumn<UserModel, String> user_password;
+    private TableColumn<User, String> user_password;
     
     @FXML
-    private TableColumn<UserModel, String> user_active;
+    private TableColumn<User, String> user_active;
     
     @FXML
-    protected TableView<UserModel> user_table1;
+    private TableColumn<User, String> user_question;
     
     @FXML
-    private TableColumn<UserModel, String> user_id1;
+    private TableColumn<User, String> user_edit;
     
     @FXML
-    private TableColumn<UserModel, String> user_email1;
+    private BarChart user_chart;
+    
+    @FXML
+    private Chart user_pie_chart;
+    
         
-    @FXML
-    private TableColumn<UserModel, String> user_name1;
-    
-    @FXML
-    private TableColumn<UserModel, String> user_role1;
-    
-    @FXML
-    private TableColumn<UserModel, String> user_password1;
-        
-    private ObservableList <UserModel> userList = FXCollections.observableArrayList();
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb)
-    {               
+    {         
+        conn = connector.connect();
+        loadData(); 
+        loadStats();
+
+    }
+    
+    @FXML
+    private void refreshBtn(ActionEvent event) {
+        refreshTable();
+    }
+    
+    private void refreshTable(){
+        
+          try {
+            userList.clear();
+            
+            query = "SELECT * FROM users";
+            prep = conn.prepareStatement(query);
+            resultSet = prep.executeQuery();
+            
+            while(resultSet.next()){
+                userList.add(new User(resultSet.getInt("id"), resultSet.getString("email"),
+                resultSet.getString("name"), resultSet.getString("password"),
+                resultSet.getInt("role"), 
+                resultSet.getString("question"),
+                resultSet.getInt("alive")));
+                user_table.setItems(userList);
+            }
+            
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+ 
+    private void loadData(){
+                        
+        refreshTable();
+        
         user_id.setCellValueFactory(new PropertyValueFactory<>("id"));
         user_email.setCellValueFactory(new PropertyValueFactory<>("email"));
         user_name.setCellValueFactory(new PropertyValueFactory<>("name"));
         user_password.setCellValueFactory(new PropertyValueFactory<>("password"));
         user_role.setCellValueFactory(new PropertyValueFactory<>("role"));
+        user_question.setCellValueFactory(new PropertyValueFactory<>("question"));
         user_active.setCellValueFactory(new PropertyValueFactory<>("active"));
         
-        user_id1.setCellValueFactory(new PropertyValueFactory<>("id"));
-        user_email1.setCellValueFactory(new PropertyValueFactory<>("email"));
-        user_name1.setCellValueFactory(new PropertyValueFactory<>("name"));
-        user_password1.setCellValueFactory(new PropertyValueFactory<>("password"));
-        user_role1.setCellValueFactory(new PropertyValueFactory<>("role"));
-        
-        
-        try{
-            //Connect to the database
-            conn = connector.connect();
-            
-            ResultSet rs = conn.createStatement().executeQuery("SELECT id, email, name, password, role, alive FROM users;");
+         Callback<TableColumn<User, String>, TableCell<User, String>> cellCreator = (TableColumn<User, String> param) -> {
+            final TableCell<User, String> cell = new TableCell<User, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                        final Button removeBtn = new Button(); 
+                        final Button editBtn = new Button();
                         
-            while(rs.next()){
-                userList.add(new UserModel(rs.getString("id"), rs.getString("email"),
-                rs.getString("name"), rs.getString("password"), rs.getInt("role"),
-                rs.getInt("alive")));
-                
-                
-            }
-            user_table.setItems(userList);
+                        Image rmImage = new Image("res/remove.png");
+                        Image editImage = new Image("res/edit.png");
                         
-            user_table1.setItems(userList);
-            
-            
-            
-        }catch (SQLException e){
-            e.printStackTrace();
-        }
+                        ImageView rmView = new  ImageView(rmImage);
+                        ImageView editView = new ImageView(editImage);
+                        
+                        rmView.setFitHeight(15);
+                        rmView.setFitWidth(15);
+                        rmView.setPreserveRatio(true);
+                        
+                        
+                        editView.setFitHeight(15);
+                        editView.setFitWidth(15);
+                        editView.setPreserveRatio(true);
+                        
+                        
+                        removeBtn.setGraphic(rmView);
+                        editBtn.setGraphic(editView);
+                        
+                        
+                        removeBtn.setOnAction( event -> {
+                            
+                            try {
+                                user = user_table.getSelectionModel().getSelectedItem();
+                                query = "DELETE FROM users WHERE id  = " + user.getId();
+                                
+                                conn = connector.connect();
+                                prep = conn.prepareStatement(query);
+                                prep.execute();
+                                refreshTable();
+                                
+                            } catch (SQLException ex) {
+                                    ex.printStackTrace();
+                            }
+
+                        });
+                        editBtn.setOnAction(event -> {
+                            
+                            user = user_table.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader ();
+                            loader.setLocation(getClass().getResource("AddUser.fxml"));
+                            try {
+                                loader.load();
+                            } catch (IOException ex) {
+ 
+                            }
+                            
+                            EditUserController addUser = loader.getController();
+                            addUser.setUpdate(true);
+                            addUser.setText("Edit User", user.getId(), user.getEmail(), user.getName(), user.getPassword(), user.getRole(), user.getQuestion(), user.getActive());
+                            Parent parent = loader.getRoot();
+                            Stage stage = new Stage();
+                            stage.setScene(new Scene(parent));
+                            stage.initStyle(StageStyle.UTILITY);
+                            stage.show();
+                            
+
+                           
+
+                        });
+
+                        HBox managebtn = new HBox(editBtn, removeBtn);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(editBtn, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(removeBtn, new Insets(2, 3, 0, 2));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+         user_edit.setCellFactory(cellCreator);
+         user_table.setItems(userList);
+         
+         
     }
     
-    
-    
-    //Require the connection and get the connection to the database
- 
+    @FXML
+    private void addUser(ActionEvent event) {
+        try {
+            Parent parent = FXMLLoader.load(getClass().getResource("AddUser.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException ex) {
+            
+        }
+    }
+     
     @FXML 
     private void signOut(ActionEvent event) throws IOException{
          Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
@@ -136,8 +255,78 @@ public class AdminController implements Initializable {
             stage.setScene(scene);
             stage.show();
             
+            try{
+                conn.close();
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+            
             final Stage adminStage = (Stage) rootpane.getScene().getWindow();
             adminStage.close();
+    }
+
+    @FXML
+    private void loadStats() {
+        
+      //Prepare XYChart.Series objects by setting data       
+      XYChart.Series<String, Integer> userSeries = new XYChart.Series<>();
+     
+      
+      XYChart.Series<String, Integer> vendorSeries = new XYChart.Series<>();
+       
+      
+      XYChart.Series<String, Integer> salesSeries = new XYChart.Series<>();
+      
+      XYChart.Series<String, Integer> adminSeries = new XYChart.Series<>();
+      
+      XYChart.Series<String, Integer> totalSeries = new XYChart.Series<>();
+        
+      try{
+            query = "SELECT COUNT(CASE WHEN role = 1 THEN 1 ELSE NULL END) AS User, \n" +
+                    "COUNT(CASE WHEN role = 2 THEN 1 ELSE NULL END) AS Vendor,\n" +
+                    "COUNT(CASE WHEN role = 3 THEN 1 ELSE NULL END) AS Salesperson,\n" +
+                    "COUNT(CASE WHEN role = 4 THEN 1 ELSE NULL END) AS Admin,\n" +
+                    "COUNT(*) as Total\n" +
+                    "FROM users;";
+            
+            prep = conn.prepareStatement(query);
+            resultSet = prep.executeQuery();
+            
+            int UserAmount = Integer.parseInt(resultSet.getString("User"));
+            int VendorAmount = Integer.parseInt(resultSet.getString("Vendor"));
+            int SalespersonAmount = Integer.parseInt(resultSet.getString("Salesperson"));
+            int AdminAmount = Integer.parseInt(resultSet.getString("Admin"));
+            int TotalAmount = Integer.parseInt(resultSet.getString("Total"));
+            
+            userSeries.getData().add(new XYChart.Data<>("User", UserAmount));
+            vendorSeries.getData().add(new XYChart.Data<>("Vendor", VendorAmount));
+            salesSeries.getData().add(new XYChart.Data<>("Salesperson", SalespersonAmount));
+            adminSeries.getData().add(new XYChart.Data<>("Admin", AdminAmount ));
+            totalSeries.getData().add(new XYChart.Data<>("Total", TotalAmount));
+            
+            userSeries.setName("Users" + " (" + UserAmount + ")");  
+            vendorSeries.setName("Vendor" + " (" + VendorAmount + ")"); 
+            salesSeries.setName("Salesperson"+ " (" + SalespersonAmount + ")"); 
+            adminSeries.setName("Admin" + " (" + AdminAmount + ")");  
+            totalSeries.setName("Total" + " (" + TotalAmount + ")");  
+
+
+            
+
+            
+            user_chart.getData().addAll(userSeries, vendorSeries, salesSeries, adminSeries, totalSeries);
+            
+            resultSet.close();
+            
+      }catch(SQLException ex){
+          ex.printStackTrace();
+      }
+      
+        
+      
+      
+
+        
     }
     
 }
