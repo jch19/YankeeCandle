@@ -26,7 +26,7 @@ public class datagen {
         
         String sql = "";
 
-        final int userAmount = 50;
+        final int userAmount = 150;
         
         try{
             Connection conn = handle.connect();
@@ -37,7 +37,7 @@ public class datagen {
   
             delUser.execute();  
             
-            sql = "INSERT INTO users (id, email, name, password, role, alive) VALUES (?, ?, ?, ?, ?, 1); ";
+            sql = "INSERT INTO users (id, email, name, password, role, question, alive) VALUES (?, ?, ?, ?, ?, ?, 1); ";
             
             PreparedStatement userData = conn.prepareStatement(sql);
             
@@ -48,10 +48,19 @@ public class datagen {
                 userData.setString(3, faker.name().firstName() + " " + faker.name().lastName());
                 userData.setString(4, faker.internet().password());
                 userData.setString(5, Integer.toString(faker.number().numberBetween(1, 4)));
+                userData.setString(6, faker.book().title().toLowerCase());
                 userData.execute();
             }
+            
+            sql ="INSERT INTO users VALUES ('"+ userAmount+1 +"', 'admin', 'admin', '1234', 4, 'harry potter' ,1);";
+            
+            PreparedStatement insertAdmin = conn.prepareStatement(sql);
+
+            insertAdmin.execute();
            
             System.out.println("Data entered");
+            
+            conn.close();
                         
         }catch(SQLException e){
             System.out.println(e.toString());

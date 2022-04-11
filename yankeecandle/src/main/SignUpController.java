@@ -8,10 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,6 +16,9 @@ import java.sql.Statement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import util.DBConnector;
 import util.Roles;
 
@@ -35,6 +34,8 @@ public class SignUpController implements Initializable {
     private static Connection conn;
     private static Statement stat;
     private PreparedStatement prep;
+    private ResultSet resultSet;
+    private String query;
 
     
     @FXML
@@ -58,6 +59,9 @@ public class SignUpController implements Initializable {
     @FXML
     private ComboBox role_select;
     
+    @FXML 
+    private TextField user_answer;  
+    
     Roles role = new Roles();
     
      
@@ -72,103 +76,110 @@ public class SignUpController implements Initializable {
         roleList.add(role.roles.get(3));
 
         role_select.setItems(roleList);
+        role_select.getSelectionModel().selectFirst();
     }
     
     @FXML
-    private void signUp(ActionEvent event){
+    private void signUp(ActionEvent event){        
         
-        if(role_select.getValue().equals(null))
-        {
-            System.out.println("Here I am!");
-        }
+        conn = connector.connect();
+        
         
         if(email.getText().trim().isEmpty() || fname.getText().trim().isEmpty() || 
-                lname.getText().trim().isEmpty() || password.getText().trim().isEmpty()){
+                lname.getText().trim().isEmpty() 
+                || password.getText().trim().isEmpty() || user_answer.getText().trim().isEmpty()){
             
             
-            createMsg.setVisible(true);
-            createMsg.setText("Please enter valid credentials");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Error: Fill all items.");
+            alert.showAndWait();
             
         }else{
-            try{
-                
-                if(checkEmail(email.getText())){
-                    createMsg.setVisible(true);
-                    createMsg.setText("Email already exists");
-                }else {
-                
-                    try{
-                        
-                    conn = connector.connect();
-
-                    String query = "INSERT INTO users (email, name, password, role, alive) VALUES (?, ?, ?, ?, 1);";
-                   
-
-                    prep = conn.prepareStatement(query);
-                    
-                    prep.setString(1, email.getText().trim());
-                    prep.setString(2, fname.getText().trim() + " " + lname.getText().trim());
-                    prep.setString(3, password.getText().trim());
-                    
-                    // 1-> User, 2-> Vendor, 3-> Salesperson, 4-> Admin
-                    if(role_select.getValue().toString().equals("User")){
-                        prep.setString(4, "1");
-                    }else if(role_select.getValue().toString().equals("Salesperson"))
-                    {
-                        prep.setString(4, "2");
-                    }else if(role_select.getValue().toString().equals("Vendor"))
-                    {
-                        prep.setString(4, "3");
-                    } 
-                    
-                    prep.execute();
-                    
-                    createMsg.setVisible(true);
-                    createMsg.setText("Your account has been created.");   
-                        
-                        }catch(SQLException e){
-                            e.printStackTrace();
-                        } 
-                }
-            }catch(SQLException e){
-                e.printStackTrace();
-            }
-            
-            
+            insertQuery();
 
         }  
     }
     
-    @FXML
-    private void login(ActionEvent event) throws IOException{
-         AnchorPane pane = FXMLLoader.load(getClass().getResource("Login.fxml"));
-         rootpane.getChildren().setAll(pane);
+    private void insertQuery()
+    {
+        try{
+             if(checkEmail(email.getText())){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setContentText("Email already exists.");
+                alert.showAndWait();
+                 
+                }else {
+                
+                resultSet.close();
+                 
+                query = "INSERT INTO users (email, name, password, role, question, alive) VALUES (?, ?, ?, ?, ?, 1);";
+
+                prep = conn.prepareStatement(query);
+
+                prep.setString(1, email.getText().trim());
+                prep.setString(2, fname.getText().trim() + " " + lname.getText().trim());
+                prep.setString(3, password.getText().trim());
+
+                // 1-> User, 2-> Vendor, 3-> Salesperson, 4-> Admin
+                if(role_select.getValue().toString().equals("User")){
+                    prep.setString(4, "1");
+                }else if(role_select.getValue().toString().equals("Salesperson"))
+                {
+                    prep.setString(4, "2");
+                }else if(role_select.getValue().toString().equals("Vendor"))
+                {
+                    prep.setString(4, "3");
+                } 
+                
+                prep.setString(5, user_answer.getText().trim().toLowerCase());
+
+                prep.execute();
+
+                
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setHeaderText(null);
+                alert.setContentText("Account Created. Welcome "+ fname.getText().trim() + " " + lname.getText().trim() );
+                alert.showAndWait();
+                       
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
     }
     
     @FXML
-    private void shop(ActionEvent event) throws IOException{
-           Parent root = FXMLLoader.load(getClass().getResource("ShopView.fxml"));
+    private void login(ActionEvent event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml")); 
 
-           Scene scene = new Scene(root);
-           Stage stage = new Stage();
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
 
-           stage.setTitle("YankeeCandle");
-           stage.setScene(scene);
-           stage.show();
+        stage.setTitle("YankeeCandle");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        
+        try {
+            conn.close();
+        }catch (SQLException ex){
+            ex.printStackTrace();
+        }
 
-           final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-           loginStage.close();
+        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+        loginStage.close();
+        
     }
     
     private boolean checkEmail(String email) throws SQLException {
         
-        
-            conn = connector.connect();
-            Statement stat = conn.createStatement();
+            stat = conn.createStatement();
 
-            ResultSet rs = stat.executeQuery("SELECT email FROM users WHERE email ='"+ email +"' ");
+            resultSet = stat.executeQuery("SELECT email FROM users WHERE email ='"+ email +"' ");
 
-            return rs.next();
+            return resultSet.next();
           
     }
      

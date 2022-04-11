@@ -19,7 +19,7 @@ public class Yankeecandle extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/admin/Admin.fxml"));
         
         Scene scene = new Scene(root);
         

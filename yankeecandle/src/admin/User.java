@@ -5,32 +5,33 @@ package admin;
  * @author Logan Jolicoeur
  * Purpose: Load user data from the sql DB
  */
-public class UserModel {
+public class User {
     
-    private String id; 
+    private int id; 
     private String email;
     private String name;
     private String password;
     private int role;
     private int active;
+    private String question;
 
-    public UserModel(String id, String email, String name, String password, int role, int active)
+    public User(int id, String email, String name, String password, int role, String question, int active)
     {
         this.id = id;
         this.email = email;
         this.name = name;
         this.password = password;
         this.role = role;
+        this.question = question;
         this.active = active;
     }
-    
-     public UserModel(String id, String email, String name, String password, int role)
-    {
-        this.id = id;
-        this.email = email;
-        this.name = name;
-        this.password = password;
-        this.role = role;
+
+    public String getQuestion() {
+        return question;
+    }
+
+    public void setQuestion(String question) {
+        this.question = question;
     }
 
     public int getRole() {
@@ -41,11 +42,11 @@ public class UserModel {
         this.role = role;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

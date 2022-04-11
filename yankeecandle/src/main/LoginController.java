@@ -13,10 +13,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.StageStyle;
 import util.DBConnector;
 
 
@@ -43,6 +43,7 @@ public class LoginController{
     private static Connection conn;
     private static Statement stat;
     private PreparedStatement prep;
+    private String query = "";
     
     String emailFound = "";
     String passwordFound = "";
@@ -54,6 +55,7 @@ public class LoginController{
     */
      @FXML 
      private void login(ActionEvent event) throws IOException {
+         conn = connector.connect();
          
        try{
           if(loginValidation(email.getText().trim(), password.getText().trim()))
@@ -64,6 +66,8 @@ public class LoginController{
               
               role =  Integer.parseInt(rs.getString("role"));
               alive = Integer.parseInt(rs.getString("alive"));
+              
+              conn.close();
               
               if(alive != 0){
                 if(role == 1){ //User View (Customer)
@@ -126,6 +130,7 @@ public class LoginController{
               
           } else{
             signinError.setVisible(true); //show that the creds are invalid 
+            signinError.setText("Invalid credentials.");
           }
           password.clear();
            
@@ -141,40 +146,34 @@ public class LoginController{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ForgotPassword.fxml"));
         Parent parent = fxmlLoader.load();
  
-        Scene scene = new Scene(parent, 600, 262);
+        Scene scene = new Scene(parent);
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initStyle(StageStyle.DECORATED);
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.showAndWait(); 
+        stage.show(); 
      }
      
      @FXML
      private void signUp(ActionEvent event) throws IOException{
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("Signup.fxml"));
-        rootpane.getChildren().setAll(pane);
-     }
-     
-     @FXML
-     private void shop(ActionEvent event) throws IOException{
-            Parent root = FXMLLoader.load(getClass().getResource("ShopView.fxml"));
-        
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
+         Parent root = FXMLLoader.load(getClass().getResource("Signup.fxml")); //NO FXML found, redo
+
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+
+        stage.setTitle("YankeeCandle");
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+
+        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+        loginStage.close();
             
-            stage.setTitle("YankeeCandle");
-            stage.setScene(scene);
-            stage.show();
-            
-            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-            loginStage.close();
      }
-     
+
      public boolean loginValidation(String email, String password) throws SQLException{
-         
-         conn = connector.connect();
-         
-         String query = "SELECT email, name, role FROM users WHERE email = ? AND password = ?";
+                  
+         query = "SELECT email, name, role FROM users WHERE email = ? AND password = ?";
          
          prep = conn.prepareStatement(query);
          prep.setString(1, email.trim());
