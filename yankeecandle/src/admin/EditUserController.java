@@ -193,5 +193,4 @@ public class EditUserController implements Initializable{
         this.update = update;
     }
     
-    
 }
