@@ -163,13 +163,21 @@ public class SignUpController implements Initializable {
         stage.show();
         
         try {
-            conn.close();
+            //Would not allow the window to close
+            //Fixed the bug
+            if(!conn.isClosed()){
+                System.out.println("Connection is still open");
+                conn.close();
+            }
+            
         }catch (SQLException ex){
             ex.printStackTrace();
+        }finally{
+            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+            loginStage.close();
         }
 
-        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-        loginStage.close();
+        
         
     }
     

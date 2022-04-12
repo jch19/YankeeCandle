@@ -36,9 +36,6 @@ public class EditUserController implements Initializable{
     
     String [] roles = {"User", "Vendor", "Salesperson", "Admin"};
     
-    
-    
-    
     @FXML
     private TextField user_name;
     
@@ -81,6 +78,7 @@ public class EditUserController implements Initializable{
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(null);
             alert.setContentText("Error: Fill all items.");
+            alert.setResizable(false);
             alert.showAndWait();
         }else{
             setQuery();
@@ -187,7 +185,6 @@ public class EditUserController implements Initializable{
         
         
     }
-    
 
     public void setUpdate(boolean update){
         this.update = update;

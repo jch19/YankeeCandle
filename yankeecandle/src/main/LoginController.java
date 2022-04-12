@@ -98,7 +98,7 @@ public class LoginController{
                       loginStage.close();
 
                 }else if(role == 3){ //Salesperson view 
-                      Parent root = FXMLLoader.load(getClass().getResource("ShopView.fxml")); //NO FXML found, redo
+                      Parent root = FXMLLoader.load(getClass().getResource("ViewCandles.fxml")); //NO FXML found, redo
 
                       Scene scene = new Scene(root);
                       Stage stage = new Stage();

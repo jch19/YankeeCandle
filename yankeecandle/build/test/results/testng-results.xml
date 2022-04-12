@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="3" passed="3">
+  <reporter-output>
+  </reporter-output>
+  <suite name="yankeecandle" duration-ms="277" started-at="2022-04-12T17:23:53Z" finished-at="2022-04-12T17:23:53Z">
+    <groups>
+    </groups>
+    <test name="TestNG tests" duration-ms="277" started-at="2022-04-12T17:23:53Z" finished-at="2022-04-12T17:23:53Z">
+      <class name="admin.EditUserControllerNGTest">
+        <test-method status="PASS" signature="setUpMethod()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="setUpMethod" is-config="true" duration-ms="238" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpMethod -->
+        <test-method status="PASS" signature="testInsert()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="testInsert" duration-ms="10" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testInsert -->
+        <test-method status="PASS" signature="tearDownMethod()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="tearDownMethod" is-config="true" duration-ms="1" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownMethod -->
+        <test-method status="PASS" signature="setUpMethod()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="setUpMethod" is-config="true" duration-ms="2" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpMethod -->
+        <test-method status="PASS" signature="testResetDB()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="testResetDB" duration-ms="3" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testResetDB -->
+        <test-method status="PASS" signature="tearDownMethod()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="tearDownMethod" is-config="true" duration-ms="0" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownMethod -->
+        <test-method status="PASS" signature="setUpMethod()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="setUpMethod" is-config="true" duration-ms="2" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUpMethod -->
+        <test-method status="PASS" signature="testSetText()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="testSetText" duration-ms="0" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSetText -->
+        <test-method status="PASS" signature="tearDownMethod()[pri:0, instance:admin.EditUserControllerNGTest@64b8f8f4]" name="tearDownMethod" is-config="true" duration-ms="0" started-at="2022-04-12T13:23:53Z" finished-at="2022-04-12T13:23:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDownMethod -->
+      </class> <!-- admin.EditUserControllerNGTest -->
+    </test> <!-- TestNG tests -->
+  </suite> <!-- yankeecandle -->
+</testng-results>

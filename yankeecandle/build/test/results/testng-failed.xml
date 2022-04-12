@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [yankeecandle]">
+  <test name="TestNG tests(failed)">
+    <classes>
+      <class name="admin.EditUserControllerNGTest">
+        <methods>
+          <include name="tearDownMethod"/>
+          <include name="setUpMethod"/>
+          <include name="testResetDB"/>
+        </methods>
+      </class> <!-- admin.EditUserControllerNGTest -->
+    </classes>
+  </test> <!-- TestNG tests(failed) -->
+</suite> <!-- Failed suite [yankeecandle] -->

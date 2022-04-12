@@ -112,8 +112,10 @@ public class AdminController implements Initializable {
                 resultSet.getInt("role"), 
                 resultSet.getString("question"),
                 resultSet.getInt("alive")));
-                user_table.setItems(userList);
             }
+            
+          user_table.setItems(userList);
+
             
             
         } catch (SQLException ex) {
@@ -237,6 +239,7 @@ public class AdminController implements Initializable {
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
         } catch (IOException ex) {
