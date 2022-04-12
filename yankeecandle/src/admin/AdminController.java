@@ -112,8 +112,9 @@ public class AdminController implements Initializable {
                 resultSet.getInt("role"), 
                 resultSet.getString("question"),
                 resultSet.getInt("alive")));
-                user_table.setItems(userList);
             }
+            user_table.setItems(userList);
+
             
             
         } catch (SQLException ex) {

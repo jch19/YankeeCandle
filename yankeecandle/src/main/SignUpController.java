@@ -166,10 +166,12 @@ public class SignUpController implements Initializable {
             conn.close();
         }catch (SQLException ex){
             ex.printStackTrace();
+        }finally{
+            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+            loginStage.close();
         }
 
-        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-        loginStage.close();
+      
         
     }
     
