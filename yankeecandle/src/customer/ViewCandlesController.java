@@ -24,33 +24,20 @@ public class ViewCandlesController {
     @FXML
     private AnchorPane rootpane;
 
-    @FXML
-    private Button addLemonade;
+
 
     @FXML
     private Button viewCartButton;
 
-    @FXML
-    private Button addCashmere;
+
 
     @FXML
     private Button exitProgram;
 
-    @FXML
-    private Button addPinkSands;
-
-    DBConnector connector = new DBConnector();
-
-    private static Connection conn;
-    private static Statement stat;
-    private PreparedStatement prep;
-    Product product = null;
-    private ObservableList<Product> productList = FXCollections.observableArrayList();
-    private String query;
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -62,26 +49,6 @@ public class ViewCandlesController {
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
-    @FXML
-    void addPinkSands(ActionEvent event) throws SQLException {
-       conn = connector.connect();
-       
-       query = "INSERT INTO cart(id, user_id, product_id, quantity) VALUES(?, ?, ?, 1)";
-       
-       prep = conn.prepareStatement(query);
-       
-       prep.execute(); 
-    }
-
-    @FXML
-    void addCashmere(ActionEvent event) {
-
-    }
-
-    @FXML
-    void addLemonade(ActionEvent event) {
-
-    }
 
     @FXML
     void viewCartButton(ActionEvent event) throws IOException {

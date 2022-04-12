@@ -17,7 +17,7 @@ public class OrdersViewController {
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();

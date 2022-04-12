@@ -71,7 +71,7 @@ public class LoginController{
               
               if(alive != 0){
                 if(role == 1){ //User View (Customer)
-                      Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
+                      Parent root = FXMLLoader.load(getClass().getResource("/customer/CustomerView.fxml"));
 
                       Scene scene = new Scene(root);
                       Stage stage = new Stage();
