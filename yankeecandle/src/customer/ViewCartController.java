@@ -1,4 +1,4 @@
-package main;
+package customer;
 
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -18,6 +18,7 @@ public class ViewCartController {
 
     // @FXML
     // private Button exitProgram;
+    
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));

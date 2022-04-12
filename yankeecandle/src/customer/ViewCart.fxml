@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minWidth="-Infinity" prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ViewCartController">
+<AnchorPane id="AnchorPane" minWidth="-Infinity" prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.ViewCartController">
    <children>
       <Button fx:id="exitProgram" layoutX="1139.0" layoutY="24.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="113.0" text="Sign out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -41,5 +41,10 @@
             <Image url="@placeholder3.JPG" />
          </image>
       </ImageView>
+      <Button layoutX="999.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="44.0" prefWidth="113.0" text="Home" AnchorPane.leftAnchor="1008.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

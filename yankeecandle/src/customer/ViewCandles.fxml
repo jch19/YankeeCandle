@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.ViewCandlesController">
+<AnchorPane prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.ViewCandlesController">
    <children>
       <Button fx:id="exitProgram" layoutX="1145.0" layoutY="47.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="113.0" text="Sign out" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
          <font>
