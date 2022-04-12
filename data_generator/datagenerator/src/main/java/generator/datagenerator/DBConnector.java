@@ -20,7 +20,7 @@ public class DBConnector {
        try{
            
            //Point to the directory where yankee.db is located to handle records 
-           String url = "jdbc:sqlite:C:/Users/warso/Desktop/Yankee-Candle/yankeecandle/src/database/yankee.db";
+           String url = "jdbc:sqlite:C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/database/yankee.db";
            
            conn = DriverManager.getConnection(url);
            
