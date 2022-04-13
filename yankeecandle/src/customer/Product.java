@@ -5,6 +5,10 @@
  */
 package customer;
 
+import java.sql.Blob;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author carol
@@ -16,10 +20,10 @@ public class Product {
     private String description;
     private double price; 
     private int quantity; 
-    private String image; 
+    private ImageView image; 
     private int category_id;
     
-public Product(int id, String name, String description, double price, int quantity, String image, int category_id) { 
+public Product(int id, String name, String description, double price, int quantity, ImageView image, int category_id) { 
         this.id = id;
         this.name = name;
         this.description = description;
@@ -37,11 +41,11 @@ public Product(int id, String name, String description, double price, int quanti
         this.description = description;
     }
 
-    public String getImage() {
+    public ImageView getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(ImageView image) {
         this.image = image;
     }
 
@@ -91,7 +95,7 @@ public Product(int id, String name, String description, double price, int quanti
     
     public void decreaseQuantity() { 
         if(this.quantity > 0) { 
-        this.quantity--;
+         this.quantity--;
         }
     }
     
