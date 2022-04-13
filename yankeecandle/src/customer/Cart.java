@@ -10,31 +10,29 @@ package customer;
  * @author carol
  */
 public class Cart {
-    private Product product; 
-    private int quantity; 
 
-    public Cart(Product product, int quantity) {
-        this.product = product;
+    private int product_id;
+    private int quantity;
+
+    public Cart(int product_id, int quantity) {
+        this.product_id = product_id;
         this.quantity = quantity;
     }
+    
+    public int getProduct_id() {
+        return product_id;
+    }
 
-    public Product getProduct() {
-        return product;
+    public void setProduct_id(int product_id) {
+        this.product_id = product_id;
     }
 
     public int getQuantity() {
         return quantity;
     }
-    
-    public void increaseQuantity() {
-        this.quantity++;
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
-    
-    public void decreaseQuantity() { 
-        if(this.quantity > 0) { 
-        this.quantity--;
-        }
-    
-    
-}
+
 }
