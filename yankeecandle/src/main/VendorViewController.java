@@ -76,15 +76,18 @@ public class VendorViewController implements Initializable{
     @FXML
     private Button logout;
     
-     @FXML
-    private Button exit;
     
     @FXML
-    private Button ViewInventory;
+    private Button refreshBtn;
 
-   
+   //fix th coloums
+    //inclue all the columns from database for product 
+    //Make sure you add all the coloumns to scenebuilder and to the code where you make it function
     @FXML
-    private TableColumn<Product, String> inventory;
+    private TableColumn<Product, String> id;
+
+ 
+
     
     @FXML
     private TableColumn<Product, String> productID;
@@ -146,8 +149,9 @@ public class VendorViewController implements Initializable{
                     } else {
 
                         final Button updateInventoryBtn = new Button(); 
-                        
-                        Image inventoryImage = new Image("updateInventory.png");
+                        //use res file and do image view in scene builder
+                        //make edit.png the image and that will turn it into button
+                        Image inventoryImage = new Image("edit.png");
                    
                         
                         ImageView inventoryImageView = new  ImageView(inventoryImage);
@@ -193,6 +197,7 @@ public class VendorViewController implements Initializable{
 
             return cell;
         };
+         //fix this 
          product_edit.setCellFactory(cellCreator);
          product_table.setItems(productList);
       }
@@ -200,13 +205,14 @@ public class VendorViewController implements Initializable{
     
     
                         
-       
+       //add a refresh button in scene builder
           @FXML
     private void refreshBtn(ActionEvent event) {
         refreshTable();
     }
+    
    @FXML
-    private void exit(ActionEvent event) throws IOException {
+    private void logout(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 
         Scene scene = new Scene(root);
@@ -219,7 +225,8 @@ public class VendorViewController implements Initializable{
         final Stage loginStage = (Stage) pane.getScene().getWindow();
         loginStage.close();
     }
-    
+    //maybe get rid of this?
+    // because I'm going to refresh the inventory
     @FXML
     void ViewInventory(ActionEvent event) throws IOException {
 
@@ -236,7 +243,7 @@ public class VendorViewController implements Initializable{
         VendorViewStage.close();
 
     }
-    
+    //Probably do not need this since I am doing an edit button instead 
      @FXML
     void UpdateStock(ActionEvent event){
 
