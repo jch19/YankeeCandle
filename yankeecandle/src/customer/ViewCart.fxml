@@ -32,10 +32,10 @@
       </Button>
       <TableView layoutY="228.0" prefHeight="613.0" prefWidth="1256.0">
         <columns>
-          <TableColumn prefWidth="220.0" text="ID" />
-          <TableColumn prefWidth="276.0" text="User ID" />
-            <TableColumn prefWidth="493.0" text="Product ID" />
-            <TableColumn prefWidth="266.0" text="Quantity" />
+          <TableColumn prefWidth="636.0" text="Product Name" />
+          <TableColumn minWidth="0.0" prefWidth="280.0" text="Product ID" />
+            <TableColumn minWidth="0.0" prefWidth="186.0" text="Quantity" />
+            <TableColumn minWidth="0.0" prefWidth="153.0" text="Edit Cart" />
         </columns>
       </TableView>
    </children>
