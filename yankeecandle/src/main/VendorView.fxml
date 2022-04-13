@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minWidth="-Infinity" prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.ViewCartController">
+<AnchorPane id="AnchorPane" minWidth="-Infinity" prefHeight="935.0" prefWidth="1256.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.ViewCartController">
    <children>
       <Button fx:id="logout" layoutX="970.0" layoutY="14.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="228.0" text="Logout" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="14.0">
          <font>
@@ -20,17 +20,7 @@
             <Image url="@ykcvlogo.png" />
          </image>
       </ImageView>
-      <Button fx:id="exit" layoutX="970.0" layoutY="91.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="228.0" text="Exit">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="ViewInventory" layoutX="64.0" layoutY="860.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="228.0" text="View Inventory">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <Button fx:id="update" layoutX="515.0" layoutY="860.0" mnemonicParsing="false" onAction="#checkout" prefHeight="44.0" prefWidth="228.0" text="Update Inventory">
+      <Button fx:id="updateBtn" layoutX="970.0" layoutY="860.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="228.0" text="Update Inventory">
          <font>
             <Font size="20.0" />
          </font>
@@ -42,7 +32,7 @@
             <TableColumn fx:id="quantity" prefWidth="493.0" text="Quantity" />
         </columns>
       </TableView>
-      <Button fx:id="refresh" layoutX="970.0" layoutY="860.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="228.0" text="Refresh">
+      <Button fx:id="refresh" layoutX="232.0" layoutY="860.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="44.0" prefWidth="228.0" text="Refresh">
          <font>
             <Font size="20.0" />
          </font>
