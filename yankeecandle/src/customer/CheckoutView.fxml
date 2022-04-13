@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="270.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CheckoutViewController">
+   <children>
+      <Button fx:id="home" layoutX="193.0" layoutY="209.0" mnemonicParsing="false" onAction="#home" prefHeight="35.0" prefWidth="74.0" text="Home" />
+      <Button fx:id="exitProgram" layoutX="285.0" layoutY="209.0" mnemonicParsing="false" onAction="#exitProgram" prefHeight="35.0" prefWidth="74.0" text="Exit" />
+      <Label layoutX="103.0" layoutY="104.0" text="YOUR ORDER HAS BEEN PLACED">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="212.0" layoutY="148.0" text="Thank you">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="178.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../main/ykcvlogo.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
