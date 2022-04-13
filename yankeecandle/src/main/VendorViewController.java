@@ -5,6 +5,7 @@
  */
 
 package main;
+import customer.Product;
 import javafx.scene.control.*;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -14,17 +15,24 @@ import javafx.collections.FXCollections;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.util.Callback;
 
 import util.DBConnector;
 
@@ -37,7 +45,7 @@ import util.DBConnector;
  */
 
 // Use this to update stock in store
-public class UpdateStock implements Initializable{
+public class VendorViewController implements Initializable{
     
     
      //For when to either update or edit existing data;
@@ -51,17 +59,22 @@ public class UpdateStock implements Initializable{
     private PreparedStatement prep;
     private ResultSet resultSet = null;
     private String query = "";
-     Product product = null;
+    Product product = null;
     private ObservableList <Product> productList = FXCollections.observableArrayList();
    
-    
-    
-public class VendorViewController {
      @FXML
     private AnchorPane pane;
 
+      @FXML
+    private Button updateBtn;
+    
+    
     @FXML
-    private logout;
+    protected TableView<Product> product_table;
+    
+     
+    @FXML
+    private Button logout;
     
      @FXML
     private Button exit;
@@ -69,12 +82,7 @@ public class VendorViewController {
     @FXML
     private Button ViewInventory;
 
-    @FXML
-    private Button update;
-    
-   @FXML
-    protected TableView<Prodcut> product;
-    
+   
     @FXML
     private TableColumn<Product, String> inventory;
     
@@ -85,18 +93,17 @@ public class VendorViewController {
     private TableColumn<Product, String> quantity;
     
     @FXML
-    private TableColumn<Product, String> pn;
+    private TableColumn<Product, String> product_name;
 
-    
-    @Override
-   public void initialize(URL url, ResourceBundle rb)
-    {         
-        rootpane.setPrefSize(600, 600);
+     @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        
         conn = connector.connect();
         loadData();
     }
     
-    private void refreshTable(){
+    
+     private void refreshTable(){
         
           try {
             productList.clear();
@@ -115,18 +122,21 @@ public class VendorViewController {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+          
+     }
           private void loadData(){
-                        
-        refreshTable();
+              
+               refreshTable();
         
-        product_productID.setCellValueFactory(new PropertyValueFactory<>("product ID"));
-        product_productName.setCellValueFactory(new PropertyValueFactory<>("product name"));
-        product_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        productID.setCellValueFactory(new PropertyValueFactory<>("product ID"));
+        product_name.setCellValueFactory(new PropertyValueFactory<>("product name"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
         
         
          Callback<TableColumn<Product, String>, TableCell<Product, String>> cellCreator = (TableColumn<Product, String> param) -> {
             final TableCell<Product, String> cell = new TableCell<Product, String>() {
                 @Override
+       
                 public void updateItem(String item, boolean empty) {
                     super.updateItem(item, empty);
                     if (empty) {
@@ -143,9 +153,9 @@ public class VendorViewController {
                         ImageView inventoryImageView = new  ImageView(inventoryImage);
                        
                         
-                        cartImageView.setFitHeight(15);
-                        cartImageView.setFitWidth(15);
-                        cartImageView.setPreserveRatio(true);
+                        inventoryImageView.setFitHeight(15);
+                        inventoryImageView.setFitWidth(15);
+                       inventoryImageView.setPreserveRatio(true);
                        
                         
                         updateInventoryBtn.setGraphic(inventoryImageView);
@@ -169,7 +179,7 @@ public class VendorViewController {
 
                         HBox managebtn = new HBox(updateInventoryBtn);
                         managebtn.setStyle("-fx-alignment:center");
-                        HBox.setMargin(addToCartBtn, new Insets(2, 2, 0, 3));
+                        HBox.setMargin(updateInventoryBtn, new Insets(2, 2, 0, 3));
                       
 
                         setGraphic(managebtn);
@@ -183,16 +193,15 @@ public class VendorViewController {
 
             return cell;
         };
-         product_updateInventory.setCellFactory(cellCreator);
+         product_edit.setCellFactory(cellCreator);
          product_table.setItems(productList);
-         
-         
-    }
+      }
+   
     
     
-    }
-
-    @FXML
+                        
+       
+          @FXML
     private void refreshBtn(ActionEvent event) {
         refreshTable();
     }
@@ -207,7 +216,7 @@ public class VendorViewController {
         stage.setScene(scene);
         stage.show();
 
-        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+        final Stage loginStage = (Stage) pane.getScene().getWindow();
         loginStage.close();
     }
     
@@ -233,5 +242,17 @@ public class VendorViewController {
 
         
 }
+         
+         
+         
+    }
     
-}
+    
+    
+
+   
+
+
+
+    
+
