@@ -27,9 +27,12 @@ public class CustomerViewController {
 
     @FXML
     private Button exitProgram;
-
+    
+    
     @FXML
     void viewCandles(ActionEvent event) throws IOException {
+        
+        
         Parent root = FXMLLoader.load(getClass().getResource("ViewCandles.fxml"));
 
         Scene scene = new Scene(root);
@@ -39,8 +42,6 @@ public class CustomerViewController {
         stage.setScene(scene);
         stage.show();
 
-        //final Stage CustomerViewStage = (Stage) rootpane.getScene().getWindow();
-        //CustomerViewStage.close();
         ((Node) (event.getSource())).getScene().getWindow().hide();
     }
 
@@ -74,7 +75,7 @@ public class CustomerViewController {
 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 
         Scene scene = new Scene(root);
         Stage stage = new Stage();
@@ -84,7 +85,6 @@ public class CustomerViewController {
         stage.show();
 
         ((Node) (event.getSource())).getScene().getWindow().hide();
-
     }
     
 
