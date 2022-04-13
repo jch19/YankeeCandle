@@ -3,6 +3,7 @@ package customer;
 import admin.EditUserController;
 import admin.User;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.*;
@@ -14,6 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -32,28 +34,17 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import util.DBConnector;
 
-public class ViewCandlesController {
+public class ViewCandlesController implements Initializable {
 
     @FXML
     private AnchorPane rootpane;
-
-
-
-    @FXML
-    private Button viewCartButton;
-
-
-
-    @FXML
-    private Button exitProgram;
-
 
     DBConnector connector = new DBConnector();
 
     private static Connection conn;
     private static Statement stat;
     private PreparedStatement prep;
-    private ResultSet resultSet = null;
+    private ResultSet resultSet;
     
     Product product = null;
     private ObservableList <Product> productList = FXCollections.observableArrayList();
@@ -78,7 +69,7 @@ public class ViewCandlesController {
     private TableColumn<Product, String> product_quantity;
     
     @FXML
-    private TableColumn<Product, String> product_image;
+    private TableColumn<Product, ImageView> product_image;
     
     @FXML
     private TableColumn<Product, String> product_categoryid;
@@ -88,14 +79,20 @@ public class ViewCandlesController {
     
     public void initialize(URL url, ResourceBundle rb)
     {         
+        rootpane.setPrefSize(600, 600);
         conn = connector.connect();
-        loadData(); 
-
+        loadData();
+ 
     }
     
-       
+    @FXML
+    private void refreshBtn(ActionEvent event){
+        refreshTable();
+    }
+    
     private void refreshTable(){
-        
+         conn = connector.connect();
+         
           try {
             productList.clear();
             
@@ -103,15 +100,26 @@ public class ViewCandlesController {
             prep = conn.prepareStatement(query);
             resultSet = prep.executeQuery();
             
+            InputStream input;
+            Image image;
+            ImageView finalImage;
+            
             while(resultSet.next()){
+                
+                
+                input = resultSet.getBinaryStream("image");
+                image = new Image(input);
+                finalImage = new ImageView(image);
+                
+                
                 productList.add(new Product(resultSet.getInt("id"), resultSet.getString("name"),
                 resultSet.getString("description"), resultSet.getDouble("price"),
                 resultSet.getInt("quantity"), 
-                resultSet.getString("image"),
+                finalImage,
                 resultSet.getInt("category_id")));
-                product_table.setItems(productList);
             }
             
+            product_table.setItems(productList);
             
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -147,7 +155,6 @@ public class ViewCandlesController {
                    
                         
                         ImageView cartImageView = new  ImageView(cartImage);
-                       
                         
                         cartImageView.setFitHeight(15);
                         cartImageView.setFitWidth(15);
@@ -194,44 +201,12 @@ public class ViewCandlesController {
          
          
     }
+     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+     
+     
     @FXML
-    void exitProgram(ActionEvent event) throws IOException {
+    private void exitProgram(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 
         Scene scene = new Scene(root);
@@ -241,12 +216,13 @@ public class ViewCandlesController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+        loginStage.close();
     }
 
 
     @FXML
-    void viewCartButton(ActionEvent event) throws IOException {
+    private void viewCartButton(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("ViewCart.fxml"));
 
         Scene scene = new Scene(root);
@@ -256,12 +232,13 @@ public class ViewCandlesController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        final Stage viewCart = (Stage) rootpane.getScene().getWindow();
+        viewCart.close();
 
     }
 
     @FXML
-    void home(ActionEvent event) throws IOException {
+    private void home(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("CustomerView.fxml"));
 
         Scene scene = new Scene(root);
@@ -271,7 +248,8 @@ public class ViewCandlesController {
         stage.setScene(scene);
         stage.show();
 
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        final Stage customerView = (Stage) rootpane.getScene().getWindow();
+        customerView.close();
     }
 
 }

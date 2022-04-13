@@ -17,34 +17,26 @@
       </Button>
       <ImageView fitHeight="197.0" fitWidth="529.0" layoutX="350.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="340.0" AnchorPane.rightAnchor="398.875" AnchorPane.topAnchor="14.0">
          <image>
-            <Image url="@ykcvlogo.png" />
+            <Image url="@../main/ykcvlogo.png" />
          </image>
       </ImageView>
-      <Button fx:id="checkout" layoutX="958.0" layoutY="791.0" mnemonicParsing="false" onAction="#checkout" prefHeight="44.0" prefWidth="228.0" text="Checkout">
+      <Button fx:id="checkout" layoutX="514.0" layoutY="854.0" mnemonicParsing="false" onAction="#checkout" prefHeight="44.0" prefWidth="228.0" text="Checkout">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Separator layoutX="841.0" layoutY="228.0" orientation="VERTICAL" prefHeight="693.0" prefWidth="59.0" />
-      <ImageView fitHeight="177.0" fitWidth="806.0" layoutX="35.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@placeholder1.JPG" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="170.0" fitWidth="806.0" layoutX="35.0" layoutY="434.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@placeholder2.JPG" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="236.0" fitWidth="368.0" layoutX="883.0" layoutY="267.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@placeholder3.JPG" />
-         </image>
-      </ImageView>
       <Button layoutX="999.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="44.0" prefWidth="113.0" text="Home" AnchorPane.leftAnchor="1008.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <TableView layoutY="228.0" prefHeight="613.0" prefWidth="1256.0">
+        <columns>
+          <TableColumn prefWidth="220.0" text="ID" />
+          <TableColumn prefWidth="276.0" text="User ID" />
+            <TableColumn prefWidth="493.0" text="Product ID" />
+            <TableColumn prefWidth="266.0" text="Quantity" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

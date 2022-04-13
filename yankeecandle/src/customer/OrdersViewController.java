@@ -13,9 +13,6 @@ import javafx.stage.Stage;
 public class OrdersViewController {
 
     @FXML
-    private Button exitProgram;
-
-    @FXML
     void exitProgram(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
 

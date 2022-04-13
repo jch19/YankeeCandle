@@ -87,7 +87,7 @@ public class datagenerator {
 
             prep.execute();
            
-            System.out.println("Data entered");
+            System.out.println("Users generated.");
                         
         }catch(SQLException e){
             System.out.println(e.toString());
