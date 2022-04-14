@@ -4,7 +4,6 @@ import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,7 +13,7 @@ import javafx.stage.Stage;
 public class CustomerViewController {
 
     @FXML
-    private AnchorPane rootpane;
+    private AnchorPane rootpane; //Make sure to set rootpane as the AnchorPane's fxid
 
     @FXML
     private Button viewOrders;
@@ -28,9 +27,10 @@ public class CustomerViewController {
     @FXML
     private Button exitProgram;
     
+
     
     @FXML
-    void viewCandles(ActionEvent event) throws IOException {
+    private void viewCandles(ActionEvent event) throws IOException {
         
         
         Parent root = FXMLLoader.load(getClass().getResource("ViewCandles.fxml"));
@@ -39,10 +39,13 @@ public class CustomerViewController {
         Stage stage = new Stage();
 
         stage.setTitle("YankeeCandle");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        
+        final Stage customerView = (Stage) rootpane.getScene().getWindow();
+        customerView.close();
+        
     }
 
     @FXML
@@ -53,10 +56,12 @@ public class CustomerViewController {
         Stage stage = new Stage();
 
         stage.setTitle("YankeeCandle");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        
+        final Stage customerView = (Stage) rootpane.getScene().getWindow();
+        customerView.close();
     }
 
     @FXML
@@ -67,10 +72,12 @@ public class CustomerViewController {
         Stage stage = new Stage();
 
         stage.setTitle("YankeeCandle");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
-
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        
+        final Stage customerView = (Stage) rootpane.getScene().getWindow();
+        customerView.close();
     }
 
     @FXML
@@ -81,10 +88,12 @@ public class CustomerViewController {
         Stage stage = new Stage();
 
         stage.setTitle("YankeeCandle");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 
-        ((Node) (event.getSource())).getScene().getWindow().hide();
+        final Stage customerView = (Stage) rootpane.getScene().getWindow();
+        customerView.close();
     }
     
 

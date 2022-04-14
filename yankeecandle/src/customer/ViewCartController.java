@@ -14,10 +14,7 @@ public class ViewCartController {
 
     @FXML
     private AnchorPane rootpane;
-
-    // @FXML
-    // private Button exitProgram;
-    
+ 
     @FXML
     void exitProgram(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
