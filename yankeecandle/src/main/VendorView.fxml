@@ -37,5 +37,10 @@
             <Font size="20.0" />
          </font>
       </Button>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="43.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../res/edit.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

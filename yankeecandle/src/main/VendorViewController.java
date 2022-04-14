@@ -44,7 +44,7 @@ import util.DBConnector;
  * @author kkirk
  */
 
-// Use this to update stock in store
+
 public class VendorViewController implements Initializable{
     
     
@@ -80,9 +80,7 @@ public class VendorViewController implements Initializable{
     @FXML
     private Button refreshBtn;
 
-   //fix th coloums
-    //inclue all the columns from database for product 
-    //Make sure you add all the coloumns to scenebuilder and to the code where you make it function
+   
     @FXML
     private TableColumn<Product, String> id;
 
@@ -147,10 +145,10 @@ public class VendorViewController implements Initializable{
                         setText(null);
 
                     } else {
-
+                        
+                        //Button for reloading updated inventory
                         final Button updateInventoryBtn = new Button(); 
-                        //use res file and do image view in scene builder
-                        //make edit.png the image and that will turn it into button
+                        
                         Image inventoryImage = new Image("edit.png");
                    
                         
@@ -197,15 +195,14 @@ public class VendorViewController implements Initializable{
 
             return cell;
         };
-         //fix this 
+         
          product_edit.setCellFactory(cellCreator);
          product_table.setItems(productList);
       }
    
     
     
-                        
-       //add a refresh button in scene builder
+       
           @FXML
     private void refreshBtn(ActionEvent event) {
         refreshTable();
@@ -225,30 +222,8 @@ public class VendorViewController implements Initializable{
         final Stage loginStage = (Stage) pane.getScene().getWindow();
         loginStage.close();
     }
-    //maybe get rid of this?
-    // because I'm going to refresh the inventory
-    @FXML
-    void ViewInventory(ActionEvent event) throws IOException {
-
-        Parent root = FXMLLoader.load(getClass().getResource("ViewInventory.fxml"));
-
-        Scene scene = new Scene(root);
-        Stage stage = new Stage();
-
-        stage.setTitle("YankeeCandle");
-        stage.setScene(scene);
-        stage.show();
-
-        final Stage VendorViewStage = (Stage) pane.getScene().getWindow();
-        VendorViewStage.close();
-
-    }
-    //Probably do not need this since I am doing an edit button instead 
-     @FXML
-    void UpdateStock(ActionEvent event){
-
-        
-}
+   
+    
          
          
          
