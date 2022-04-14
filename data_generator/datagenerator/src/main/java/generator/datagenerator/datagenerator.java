@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Random;
 
 /**
  *
@@ -28,6 +29,11 @@ public class datagenerator {
 
     private  Faker faker = new Faker(); 
     
+    private String[] status = {"Completed", "Processing", "Shipped"};
+    
+    private Random rand = new Random();
+
+    
     
     public datagenerator(){
         
@@ -44,6 +50,8 @@ public class datagenerator {
         }catch(FileNotFoundException ex){
             ex.printStackTrace(); 
         }
+        
+        generateOrders();
         
         try{
          
@@ -133,6 +141,41 @@ public class datagenerator {
             ex.printStackTrace();
         }
         
+    }
+    
+    private void generateOrders(){
+        //Delete from the table
+        try{
+            
+            query = "DELETE FROM order_details";
+
+            prep = conn.prepareStatement(query);
+            
+            prep.execute();
+            
+            query = "INSERT INTO order_details (id, user_id, total, product_id, quantity, provider, status) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?); ";
+            
+            prep = conn.prepareStatement(query);
+            
+            
+            for(int i = 1; i <= 15; ++i){
+                
+                prep.setString(1, Integer.toString(i));
+                prep.setString(2,  Integer.toString(faker.number().numberBetween(1, 30)));
+                prep.setString(3,  faker.commerce().price(50, 70));
+                prep.setString(4,  Integer.toString(faker.number().numberBetween(2, 15)));
+                prep.setString(5,  Integer.toString(faker.number().numberBetween(1, 5)));
+                prep.setString(6, faker.company().name());
+                prep.setString(7, status[rand.nextInt(status.length)]);
+                prep.executeUpdate();
+            }
+            
+            System.out.println("Orders generated.");
+            
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }
     }
     
 }

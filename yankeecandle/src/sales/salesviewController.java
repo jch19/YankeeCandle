@@ -42,14 +42,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
-import javafx.scene.chart.*;
 import util.DBConnector;
 
 
 /**
  * 
  *
- * @author Dominique Simmons
+ * @author Logan Jolicoeur
  */
 public class salesviewController implements Initializable {
 
@@ -66,21 +65,157 @@ public class salesviewController implements Initializable {
     private ResultSet resultSet = null;
     
     @FXML
-    private TableColumn<?, ?> user_name;
+    private TableView<Sale> sale_table;
     
     @FXML
-    private TableColumn<?, ?> user_ordernum;
+    private TableColumn<Sale, Integer> order_number;
     
     @FXML
-    private TableColumn<?, ?> user_email;
+    private TableColumn<Sale, String> name;
+    
+    @FXML
+    private TableColumn<Sale, String> email;
         
     @FXML
-    private TableColumn<?, ?> user_order;
+    private TableColumn<Sale, String> product;
+    
+    @FXML
+    private TableColumn<Sale, String> status;
+    
+    @FXML
+    private TableColumn<Sale, String> edit;    
+    
+    Sale sale = null;
+    private ObservableList <Sale> saleList = FXCollections.observableArrayList();
+    private String query = "";
+
+    
+    @FXML
+    private void refreshBtn(ActionEvent event){
+        refreshTable();
+    }
+    
+     private void refreshTable(){
+
+          try {
+            saleList.clear();
+            
+            query = "SELECT order_details.id AS id, users.name AS name, email, products.name AS product_name, status FROM order_details \n" +
+                     "JOIN users ON users.id = order_details.user_id JOIN products ON products.id = product_id";
+            prep = conn.prepareStatement(query);
+            resultSet = prep.executeQuery();
+            
+            while(resultSet.next()){
+                
+                saleList.add(new Sale(resultSet.getInt("id"), resultSet.getString("name"),
+                resultSet.getString("email"),resultSet.getString("product_name"), resultSet.getString("status")));
+            }
+            
+            sale_table.setItems(saleList);
+                        
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
     
     
-    //create one for Status Label
+    //Populate table with data from database
+    @FXML
+    private void loadData() {
+        
+        refreshTable();
+        
+        order_number.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        email.setCellValueFactory(new PropertyValueFactory<>("email"));
+        product.setCellValueFactory(new PropertyValueFactory<>("product"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        
+        
+               
+         Callback<TableColumn<Sale, String>, TableCell<Sale, String>> cellCreator = (TableColumn<Sale, String> param) -> {
+            final TableCell<Sale, String> cell = new TableCell<Sale, String>() {
+                @Override
+                public void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty) {
+                        setGraphic(null);
+                        setText(null);
+
+                    } else {
+
+                         final Button editBtn = new Button();
+                        
+                         
+                        Image editImage = new Image("res/edit.png");
+                        
+                         
+                        ImageView editView = new ImageView(editImage);
+                        
+                       
+                        
+                        editView.setFitHeight(15);
+                        editView.setFitWidth(15);
+                        editView.setPreserveRatio(true);
+                        
+                        
+                        
+                        editBtn.setGraphic(editView);
+                        
+                        
+                        editBtn.setOnAction(event -> {
+                            
+                            sale = sale_table.getSelectionModel().getSelectedItem();
+                            FXMLLoader loader = new FXMLLoader ();
+                            loader.setLocation(getClass().getResource("EditSale.fxml"));
+                            try {
+                                loader.load();
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                            
+                            
+                            EditSaleController edit = loader.getController();
+                            edit.setText(sale.getId(), sale.getStatus());
+                            Parent parent = loader.getRoot();
+                            Stage stage = new Stage();
+                            stage.setResizable(false);
+                            stage.setScene(new Scene(parent));
+                            stage.initStyle(StageStyle.UTILITY);
+                            stage.show();
+                             
+                        });
+
+                        HBox managebtn = new HBox(editBtn);
+                        managebtn.setStyle("-fx-alignment:center");
+                        HBox.setMargin(editBtn, new Insets(2, 2, 0, 3));
+
+                        setGraphic(managebtn);
+
+                        setText(null);
+
+                    }
+                }
+
+            };
+
+            return cell;
+        };
+         edit.setCellFactory(cellCreator);
+        
+    }
+
+   @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {         
+        conn = connector.connect();
+        loadData(); 
+
+    }
+
     
-    //Sign out method
+    
+        //Sign out method
     @FXML 
     private void signOut(ActionEvent event) throws IOException{
          Parent root = FXMLLoader.load(getClass().getResource("/main/Login.fxml"));
@@ -94,26 +229,6 @@ public class salesviewController implements Initializable {
             
             final Stage salesStage = (Stage) rootpane.getScene().getWindow();
             salesStage.close();
-    }
-    
-    //Populate table with data from database
-    @FXML
-    private void loadData() {
-        
-        
-    }
-
-   @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {         
-        conn = connector.connect();
-        loadData(); 
-        loadStats();
-
-    }
-
-    private void loadStats() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

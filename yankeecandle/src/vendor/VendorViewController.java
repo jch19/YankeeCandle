@@ -219,8 +219,7 @@ public class VendorViewController implements Initializable{
             return cell;
         };
          product_edit.setCellFactory(cellCreator);
-         product_table.setItems(productList);
- 
+  
     }
      
     @FXML
