@@ -127,10 +127,10 @@ public class EditUserController implements Initializable{
              // 1-> User, 2-> Vendor, 3-> Salesperson, 4-> Admin
             if(role_select.getValue().toString().equals("User")){
                 prep.setString(4, "1");
-            }else if(role_select.getValue().toString().equals("Salesperson"))
+            }else if(role_select.getValue().toString().equals("Vendor"))
             {
                 prep.setString(4, "2");
-            }else if(role_select.getValue().toString().equals("Vendor"))
+            }else if(role_select.getValue().toString().equals("Salesperson"))
             {
                 prep.setString(4, "3");
             } else{

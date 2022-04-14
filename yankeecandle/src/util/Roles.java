@@ -16,8 +16,8 @@ public class Roles {
     public Roles(){
     
       roles.put(1, "User");
-      roles.put(2, "Salesperson");
-      roles.put(3, "Vendor");
+      roles.put(2, "Vendor");
+      roles.put(3, "Salesperson");
       roles.put(4, "Admin");
    
     }      
