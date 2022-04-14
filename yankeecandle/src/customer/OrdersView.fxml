@@ -21,29 +21,18 @@
             <Font size="20.0" />
          </font>
       </Button>
-      <Accordion layoutX="-3.0" layoutY="219.0" prefHeight="712.0" prefWidth="1262.0">
-        <panes>
-          <TitledPane animated="false" text="Order #">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="Order #">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="Order #">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
       <Button fx:id="home" layoutX="1019.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="44.0" prefWidth="113.0" text="Home" AnchorPane.leftAnchor="1008.0" AnchorPane.rightAnchor="135.0" AnchorPane.topAnchor="14.0">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
+      <TableView layoutY="237.0" prefHeight="700.0" prefWidth="1256.0">
+        <columns>
+          <TableColumn prefWidth="341.0" text="ID" />
+          <TableColumn prefWidth="501.0" text="Order ID" />
+            <TableColumn prefWidth="239.0" text="Product ID" />
+            <TableColumn prefWidth="174.0" text="Quantity" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
