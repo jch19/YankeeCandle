@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="187.0" prefWidth="290.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sales.EditSaleController">
+   <children>
+      <Label fx:id="dialog_title" layoutX="118.0" layoutY="14.0" text="Sale">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Button layoutX="118.0" layoutY="138.0" mnemonicParsing="false" onAction="#save" text="Save">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Button>
+      <ComboBox fx:id="status_select" layoutX="70.0" layoutY="81.0" prefWidth="150.0" promptText="Select Status" />
+   </children>
+</AnchorPane>

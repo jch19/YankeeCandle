@@ -1,6 +1,7 @@
 package admin;
 
 
+import customer.Product;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -28,6 +29,8 @@ import javafx.scene.image.ImageView;
 import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javafx.scene.chart.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.TextField;
 
 /**
  *
@@ -75,6 +78,9 @@ public class AdminController implements Initializable {
     
     @FXML
     private TableColumn<User, String> user_edit;
+    
+    @FXML
+    private TextField searchField;
     
     @FXML
     private BarChart user_chart;
@@ -130,6 +136,7 @@ public class AdminController implements Initializable {
             ex.printStackTrace();
         }
     }
+    
  
     private void loadData(){
         refreshTable();
@@ -199,7 +206,7 @@ public class AdminController implements Initializable {
                             try {
                                 loader.load();
                             } catch (IOException ex) {
- 
+                                ex.printStackTrace();
                             }
                             
                             EditUserController addUser = loader.getController();
@@ -262,10 +269,10 @@ public class AdminController implements Initializable {
                 conn.close();
             }catch(SQLException e){
                 e.printStackTrace();
+            }finally{
+                final Stage adminStage = (Stage) rootpane.getScene().getWindow();
+                adminStage.close();
             }
-            
-            final Stage adminStage = (Stage) rootpane.getScene().getWindow();
-            adminStage.close();
     }
 
     @FXML
@@ -309,9 +316,60 @@ public class AdminController implements Initializable {
 
         }catch(SQLException ex){
             ex.printStackTrace();
-        }                 
+        } 
+        
+    }
  
+    @FXML
+    private void searchBtn(ActionEvent event){
+        
+     String searchItem = searchField.getText().trim();
+        
+     if(searchItem.isEmpty()){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Nothing entered.");
+            alert.showAndWait();
+                
+            refreshTable();
+      }else{
+        
+        try{
+                query = "SELECT * FROM users WHERE name LIKE '"+searchItem+"%'; ";
+
+                prep = conn.prepareStatement(query);
+
+                resultSet = prep.executeQuery();
+                
+                userList.clear();
+                
+                if(resultSet.next()){
+                    
+                    while(resultSet.next()){
+                         userList.add(new User(resultSet.getInt("id"), resultSet.getString("email"),
+                        resultSet.getString("name"), resultSet.getString("password"),
+                        resultSet.getInt("role"), 
+                        resultSet.getString("question"),
+                        resultSet.getInt("alive")));
+                    }
+                    user_table.setItems(userList);
+
+                }else{
+                    refreshTable();
+                    
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setHeaderText(null);
+                    alert.setContentText("Could not find user.");
+                    alert.showAndWait();
+                }
+     
+            }catch(SQLException ex){
+                 ex.printStackTrace();
+            }
+              
+        }
+        
+    }
         
    }
     
-}

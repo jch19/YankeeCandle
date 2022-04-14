@@ -59,7 +59,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="home1" layoutX="773.0" layoutY="14.0" mnemonicParsing="false" onAction="#home" prefHeight="44.0" prefWidth="113.0" text="Refresh">
+      <Button fx:id="home1" layoutX="773.0" layoutY="14.0" mnemonicParsing="false" onAction="#refreshBtn" prefHeight="44.0" prefWidth="113.0" text="Refresh">
          <font>
             <Font size="20.0" />
          </font>

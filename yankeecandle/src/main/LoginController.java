@@ -60,13 +60,19 @@ public class LoginController{
      private void login(ActionEvent event) throws IOException {
          conn = connector.connect();
          
+         String user_email = email.getText().trim();
+         String user_password = password.getText().trim();
+         
        try{
-          if(loginValidation(email.getText().trim(), password.getText().trim()))
-          {
-              String query = "SELECT id, role, alive FROM users WHERE email = '"+emailFound+"' AND '"+ passwordFound+"';";
+          
+              String query = "SELECT id, role, alive FROM users WHERE email = ? AND password = ?";
               prep = conn.prepareStatement(query);
-              resultSet = prep.executeQuery();
               
+              prep.setString(1, user_email);
+              prep.setString(2, user_password);
+              
+              resultSet  = prep.executeQuery();
+                            
               role =  resultSet.getInt("role");
               alive = resultSet.getInt("alive");
               int id = resultSet.getInt("id");
@@ -96,7 +102,7 @@ public class LoginController{
                       }
 
                 }else if(role == 2){ //Vendor Login
-                     Parent root = FXMLLoader.load(getClass().getResource("VendorView.fxml"));
+                     Parent root = FXMLLoader.load(getClass().getResource("/vendor/VendorView.fxml"));
 
                       Scene scene = new Scene(root);
                       Stage stage = new Stage();
@@ -160,13 +166,10 @@ public class LoginController{
               signinError.setText("You have been banned.");
           }
               
-          } else{
-            signinError.setVisible(true); //show that the creds are invalid 
-            signinError.setText("Invalid credentials.");
-          }
+         
           password.clear();
            
-           
+          
            
        }catch (SQLException e){
            e.printStackTrace();
@@ -207,24 +210,5 @@ public class LoginController{
             loginStage.close();
         }
      }
-
-     public boolean loginValidation(String email, String password) throws SQLException{
-                  
-         query = "SELECT email, name, role FROM users WHERE email = ? AND password = ?";
-         
-         prep = conn.prepareStatement(query);
-         prep.setString(1, email.trim());
-         prep.setString(2, password.trim());
-         resultSet = prep.executeQuery();
-         if(resultSet.next()){
-             emailFound = email;
-             passwordFound = password;
-             return true;
-         }else{
-             return false;
-         }
-         
-     }
-     
      
 }
