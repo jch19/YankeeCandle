@@ -101,11 +101,13 @@ public class ViewCandlesController implements Initializable {
             alert.setHeaderText(null);
             alert.setContentText("Nothing entered.");
             alert.showAndWait();
+            
+            refreshTable();
                 
       }else{
         
         try{
-                query = "SELECT * FROM products WHERE name LIKE '"+searchField.getText().trim()+"%'; ";
+                query = "SELECT * FROM products WHERE name LIKE '"+searchItem+"%'; ";
 
                 prep = conn.prepareStatement(query);
 

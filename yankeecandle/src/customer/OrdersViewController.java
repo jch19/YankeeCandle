@@ -51,16 +51,26 @@ public class OrdersViewController implements Initializable {
     private TableColumn<Orders, String> id;
 
     @FXML
-    private TableColumn<Orders, String> orderid;
-
+    private TableColumn<Orders, String> user_name;
+    
     @FXML
-    private TableColumn<Orders, String> prodid;
-
+    private TableColumn<Orders, Integer> quantity;
+     
     @FXML
-    private TableColumn<Orders, String> quantity;
+    private TableColumn<Orders, Double> total_amount;
+    
+    @FXML
+    private TableColumn<Orders, String> provider;
+    
+    @FXML
+    private TableColumn<Orders, String> status;
+    
+    
+    
+    
+    
 
     public void initialize(URL url, ResourceBundle rb) {
-        rootpane.setPrefSize(600, 600);
         conn = connector.connect();
         loadData();
 
@@ -72,7 +82,7 @@ public class OrdersViewController implements Initializable {
         try {
             orderList.clear();
 
-            query = "SELECT * FROM order_items";
+            query = "SELECT order_details.id AS id, total, quantity, provider, status, name FROM order_details JOIN users WHERE user_id = users.id AND user_id =" +userID.uID;
             prep = conn.prepareStatement(query);
             resultSet = prep.executeQuery();
 
@@ -82,8 +92,10 @@ public class OrdersViewController implements Initializable {
 
             while (resultSet.next()) {
 
-                orderList.add(new Orders(resultSet.getInt("id"), resultSet.getInt("order_id"),
-                        resultSet.getInt("product_id"), resultSet.getInt("quantity")));
+                orderList.add(new Orders(resultSet.getInt("id"), resultSet.getString("name"), 
+                        resultSet.getDouble("total"),resultSet.getInt("quantity"), 
+                        resultSet.getString("provider"), 
+                        resultSet.getString("status")));
             }
 
             order_table.setItems(orderList);
@@ -98,12 +110,12 @@ public class OrdersViewController implements Initializable {
         refreshTable();
         
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        orderid.setCellValueFactory(new PropertyValueFactory<>("order_id"));
-        prodid.setCellValueFactory(new PropertyValueFactory<>("product_id"));
+        user_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        total_amount.setCellValueFactory(new PropertyValueFactory<>("total"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
-        
-        order_table.setItems(orderList);
-         
+        provider.setCellValueFactory(new PropertyValueFactory<>("provider"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+                 
     }
 
     @FXML

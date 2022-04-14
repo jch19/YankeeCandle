@@ -5,26 +5,32 @@
  */
 package customer;
 
+import javafx.scene.image.ImageView;
+
 /**
  *
  * @author carol
  */
 public class Cart {
 
-    private int product_id;
+    private int id;
     private int quantity;
+    private ImageView image;
+    private String name;
 
-    public Cart(int product_id, int quantity) {
-        this.product_id = product_id;
+    public Cart(int id, String name, int quantity, ImageView image ) {
+        this.id = id;
+        this.name = name;
         this.quantity = quantity;
-    }
-    
-    public int getProduct_id() {
-        return product_id;
+        this.image = image;
     }
 
-    public void setProduct_id(int product_id) {
-        this.product_id = product_id;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getQuantity() {
@@ -35,4 +41,21 @@ public class Cart {
         this.quantity = quantity;
     }
 
+    public ImageView getImage() {
+        return image;
+    }
+
+    public void setImage(ImageView image) {
+        this.image = image;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+ 
 }
