@@ -67,7 +67,6 @@ public class SignUpController implements Initializable {
      
     private final ObservableList<String> roleList = FXCollections.observableArrayList();
     
-    
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {         

@@ -2,6 +2,8 @@
 
 package main;
 
+import customer.CustomerViewController;
+import customer.ViewCandlesController;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +20,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.StageStyle;
 import util.DBConnector;
-
+import customer.userID;
 
 /**
  *
@@ -43,12 +45,13 @@ public class LoginController{
     private static Connection conn;
     private static Statement stat;
     private PreparedStatement prep;
+    private ResultSet resultSet;
     private String query = "";
     
-    String emailFound = "";
-    String passwordFound = "";
-    int role; 
-    int alive; // 1=notbanned, 0 = banned
+    private String emailFound = "";
+    private String passwordFound = "";
+    private int role; 
+    private int alive; // 1=notbanned, 0 = banned
     
     /*
         function that handles when we press the login button    
@@ -60,15 +63,14 @@ public class LoginController{
        try{
           if(loginValidation(email.getText().trim(), password.getText().trim()))
           {
-              String query = "SELECT role, alive FROM users WHERE email = '"+emailFound+"' AND '"+ passwordFound+"';";
+              String query = "SELECT id, role, alive FROM users WHERE email = '"+emailFound+"' AND '"+ passwordFound+"';";
               prep = conn.prepareStatement(query);
-              ResultSet rs = prep.executeQuery();
+              resultSet = prep.executeQuery();
               
-              role =  Integer.parseInt(rs.getString("role"));
-              alive = Integer.parseInt(rs.getString("alive"));
-              
-              conn.close();
-              
+              role =  resultSet.getInt("role");
+              alive = resultSet.getInt("alive");
+              int id = resultSet.getInt("id");
+                            
               if(alive != 0){
                 if(role == 1){ //User View (Customer)
                       Parent root = FXMLLoader.load(getClass().getResource("/customer/CustomerView.fxml"));
@@ -79,10 +81,19 @@ public class LoginController{
                       stage.setTitle("YankeeCandle");
                       stage.setScene(scene);
                       stage.show();
-
-                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-                      loginStage.close();
-
+                      
+                      //Grab the uID and set it;
+                      //TODO add a sessionID to the DB
+                      userID.uID = id;
+                      
+                      try{
+                        conn.close();
+                      }catch(SQLException ex){
+                        ex.printStackTrace();
+                      }finally{
+                        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                        loginStage.close();
+                      }
 
                 }else if(role == 2){ //Vendor Login
                      Parent root = FXMLLoader.load(getClass().getResource("VendorView.fxml"));
@@ -94,11 +105,18 @@ public class LoginController{
                       stage.setScene(scene);
                       stage.show();
 
-                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-                      loginStage.close();
+                      
+                      try{
+                            conn.close();
+                      }catch(SQLException ex){
+                          ex.printStackTrace();
+                      }finally{
+                        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                        loginStage.close();
+                      }
 
                 }else if(role == 3){ //Salesperson view 
-                      Parent root = FXMLLoader.load(getClass().getResource("ShopView.fxml")); //NO FXML found, redo
+                     Parent root = FXMLLoader.load(getClass().getResource(""));
 
                       Scene scene = new Scene(root);
                       Stage stage = new Stage();
@@ -107,10 +125,18 @@ public class LoginController{
                       stage.setScene(scene);
                       stage.show();
 
-                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-                      loginStage.close();
+                      try{
+                           conn.close();
+                      }catch(SQLException ex){
+                          ex.printStackTrace();
+                      }finally{
+                        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                        loginStage.close();
+                      }
+                    
+                    
                 }else if(role == 4){
-                     Parent root = FXMLLoader.load(getClass().getResource("/admin/Admin.fxml"));
+                      Parent root = FXMLLoader.load(getClass().getResource("/admin/Admin.fxml"));
 
                       Scene scene = new Scene(root);
                       Stage stage = new Stage();
@@ -119,8 +145,14 @@ public class LoginController{
                       stage.setScene(scene);
                       stage.show();
 
-                      final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-                      loginStage.close();
+                      try{
+                           conn.close();
+                      }catch(SQLException ex){
+                          ex.printStackTrace();
+                      }finally{
+                        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+                        loginStage.close();
+                      }
                 }
 
           }else{
@@ -166,9 +198,14 @@ public class LoginController{
         stage.setScene(scene);
         stage.show();
 
-        final Stage loginStage = (Stage) rootpane.getScene().getWindow();
-        loginStage.close();
-            
+        try{
+            conn.close();
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }finally{
+            final Stage loginStage = (Stage) rootpane.getScene().getWindow();
+            loginStage.close();
+        }
      }
 
      public boolean loginValidation(String email, String password) throws SQLException{
@@ -178,8 +215,8 @@ public class LoginController{
          prep = conn.prepareStatement(query);
          prep.setString(1, email.trim());
          prep.setString(2, password.trim());
-         ResultSet rs = prep.executeQuery();
-         if(rs.next()){
+         resultSet = prep.executeQuery();
+         if(resultSet.next()){
              emailFound = email;
              passwordFound = password;
              return true;

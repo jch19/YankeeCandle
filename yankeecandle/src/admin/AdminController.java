@@ -79,15 +79,23 @@ public class AdminController implements Initializable {
     @FXML
     private BarChart user_chart;
     
-    @FXML
-    private Chart user_pie_chart;
+    //Prepare XYChart.Series objects by setting data       
+    private XYChart.Series<String, Integer> userSeries = new XYChart.Series<>();
+
+    private XYChart.Series<String, Integer> vendorSeries = new XYChart.Series<>();
+
+    private XYChart.Series<String, Integer> salesSeries = new XYChart.Series<>();
+
+    private XYChart.Series<String, Integer> adminSeries = new XYChart.Series<>();
+
+    private XYChart.Series<String, Integer> totalSeries = new XYChart.Series<>();
     
         
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {         
         conn = connector.connect();
-        loadData(); 
+        loadData();
         loadStats();
 
     }
@@ -96,6 +104,7 @@ public class AdminController implements Initializable {
     private void refreshBtn(ActionEvent event) {
         refreshTable();
     }
+    
     
     private void refreshTable(){
         
@@ -123,7 +132,6 @@ public class AdminController implements Initializable {
     }
  
     private void loadData(){
-                        
         refreshTable();
         
         user_id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -174,9 +182,8 @@ public class AdminController implements Initializable {
                                 user = user_table.getSelectionModel().getSelectedItem();
                                 query = "DELETE FROM users WHERE id  = " + user.getId();
                                 
-                                conn = connector.connect();
                                 prep = conn.prepareStatement(query);
-                                prep.execute();
+                                prep.executeUpdate();
                                 refreshTable();
                                 
                             } catch (SQLException ex) {
@@ -200,12 +207,10 @@ public class AdminController implements Initializable {
                             addUser.setText("Edit User", user.getId(), user.getEmail(), user.getName(), user.getPassword(), user.getRole(), user.getQuestion(), user.getActive());
                             Parent parent = loader.getRoot();
                             Stage stage = new Stage();
+                            stage.setResizable(false);
                             stage.setScene(new Scene(parent));
                             stage.initStyle(StageStyle.UTILITY);
                             stage.show();
-                            
-
-                           
 
                         });
 
@@ -225,10 +230,7 @@ public class AdminController implements Initializable {
 
             return cell;
         };
-         user_edit.setCellFactory(cellCreator);
-         user_table.setItems(userList);
-         
-         
+         user_edit.setCellFactory(cellCreator);    
     }
     
     @FXML
@@ -241,7 +243,7 @@ public class AdminController implements Initializable {
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
         } catch (IOException ex) {
-            
+            ex.printStackTrace(); 
         }
     }
      
@@ -269,20 +271,9 @@ public class AdminController implements Initializable {
     @FXML
     private void loadStats() {
         
-      //Prepare XYChart.Series objects by setting data       
-      XYChart.Series<String, Integer> userSeries = new XYChart.Series<>();
-     
-      
-      XYChart.Series<String, Integer> vendorSeries = new XYChart.Series<>();
-       
-      
-      XYChart.Series<String, Integer> salesSeries = new XYChart.Series<>();
-      
-      XYChart.Series<String, Integer> adminSeries = new XYChart.Series<>();
-      
-      XYChart.Series<String, Integer> totalSeries = new XYChart.Series<>();
         
-      try{
+        try{
+            
             query = "SELECT COUNT(CASE WHEN role = 1 THEN 1 ELSE NULL END) AS User, \n" +
                     "COUNT(CASE WHEN role = 2 THEN 1 ELSE NULL END) AS Vendor,\n" +
                     "COUNT(CASE WHEN role = 3 THEN 1 ELSE NULL END) AS Salesperson,\n" +
@@ -304,30 +295,23 @@ public class AdminController implements Initializable {
             salesSeries.getData().add(new XYChart.Data<>("Salesperson", SalespersonAmount));
             adminSeries.getData().add(new XYChart.Data<>("Admin", AdminAmount ));
             totalSeries.getData().add(new XYChart.Data<>("Total", TotalAmount));
-            
+
             userSeries.setName("Users" + " (" + UserAmount + ")");  
             vendorSeries.setName("Vendor" + " (" + VendorAmount + ")"); 
             salesSeries.setName("Salesperson"+ " (" + SalespersonAmount + ")"); 
             adminSeries.setName("Admin" + " (" + AdminAmount + ")");  
-            totalSeries.setName("Total" + " (" + TotalAmount + ")");  
-
-
+            totalSeries.setName("Total" + " (" + TotalAmount + ")"); 
+    
             
-
-            
-            user_chart.getData().addAll(userSeries, vendorSeries, salesSeries, adminSeries, totalSeries);
-            
-            resultSet.close();
-            
-      }catch(SQLException ex){
-          ex.printStackTrace();
-      }
-      
+        user_chart.getData().addAll(userSeries, vendorSeries, salesSeries, adminSeries, totalSeries);
         
-      
-      
+        resultSet.close();
 
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }                 
+ 
         
-    }
+   }
     
 }
