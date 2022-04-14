@@ -52,7 +52,7 @@ public class ViewCartController implements Initializable {
     protected TableView<Cart> cart_table;
 
     
-    //private TableColumn<Cart, String> cart_prodname;
+    private TableColumn<Cart, String> cart_prodname;
 
     @FXML
     private TableColumn<Cart, String> cart_pid;
@@ -76,7 +76,7 @@ public class ViewCartController implements Initializable {
         try {
             cartList.clear();
 
-            query = "SELECT * FROM cart";
+            query = "SELECT product_id, quantity FROM cart";
             prep = conn.prepareStatement(query);
             resultSet = prep.executeQuery();
 
@@ -154,7 +154,6 @@ public class ViewCartController implements Initializable {
             return cell;
         };
         cart_editCart.setCellFactory(cellCreator);
-        
         cart_table.setItems(cartList);
 
     }
