@@ -76,9 +76,7 @@ public class ViewCandlesController implements Initializable {
     @FXML
     private TextField searchField;
     
-    private InputStream input;
-    private Image image;
-    private ImageView finalImage;
+   
     
     public void initialize(URL url, ResourceBundle rb)
     {         
@@ -114,6 +112,10 @@ public class ViewCandlesController implements Initializable {
                 resultSet = prep.executeQuery();
                 
                 productList.clear();
+                
+                InputStream input;
+                Image image;
+                ImageView finalImage;
                 
                 if(resultSet.next()){
                     
@@ -159,6 +161,10 @@ public class ViewCandlesController implements Initializable {
             prep = conn.prepareStatement(query);
             resultSet = prep.executeQuery();
             
+            InputStream input;
+            Image image;
+            ImageView finalImage;
+             
             while(resultSet.next()){
                 
                 input = resultSet.getBinaryStream("image");

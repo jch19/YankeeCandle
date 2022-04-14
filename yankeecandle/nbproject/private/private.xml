@@ -5,8 +5,11 @@
         <group>
             <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/vendor/VendorViewController.java</file>
             <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/main/Yankeecandle.java</file>
+            <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/customer/CustomerViewController.java</file>
             <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/sales/EditSaleController.java</file>
             <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/sales/salesviewController.java</file>
+            <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/main/LoginController.java</file>
+            <file>file:/C:/Users/warso/Desktop/YankeeCandle/yankeecandle/src/customer/ViewCandlesController.java</file>
         </group>
     </open-files>
 </project-private>

@@ -122,7 +122,7 @@ public class LoginController{
                       }
 
                 }else if(role == 3){ //Salesperson view 
-                     Parent root = FXMLLoader.load(getClass().getResource(""));
+                     Parent root = FXMLLoader.load(getClass().getResource("/sales/salesview.fxml"));
 
                       Scene scene = new Scene(root);
                       Stage stage = new Stage();
