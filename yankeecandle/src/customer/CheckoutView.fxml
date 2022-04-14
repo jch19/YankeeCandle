@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="270.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customer.CheckoutViewController">
+<AnchorPane id="AnchorPane" prefHeight="270.0" prefWidth="556.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="103.0" layoutY="141.0" text="YOUR ORDER HAS BEEN PLACED">
          <font>
